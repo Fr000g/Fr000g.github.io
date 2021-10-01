@@ -6,7 +6,7 @@
   <link href="http://fr000g.github.io/project/atom.xml" rel="self"/>
   
   <link href="http://fr000g.github.io/project/"/>
-  <updated>2021-10-01T13:11:49.697Z</updated>
+  <updated>2021-09-29T14:25:26.755Z</updated>
   <id>http://fr000g.github.io/project/</id>
   
   <author>
@@ -17,31 +17,18 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>test artical</title>
-    <link href="http://fr000g.github.io/project/2021/10/01/test-artical/"/>
-    <id>http://fr000g.github.io/project/2021/10/01/test-artical/</id>
-    <published>2021-10-01T13:11:49.000Z</published>
-    <updated>2021-10-01T13:11:49.697Z</updated>
+    <title></title>
+    <link href="http://fr000g.github.io/project/2021/10/01/%E5%9B%BE%E7%89%87%E5%88%86%E6%9E%90/"/>
+    <id>http://fr000g.github.io/project/2021/10/01/%E5%9B%BE%E7%89%87%E5%88%86%E6%9E%90/</id>
+    <published>2021-10-01T14:58:19.124Z</published>
+    <updated>2021-09-29T14:25:26.755Z</updated>
     
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://fr000g.github.io/project/2021/10/01/hello-world/"/>
-    <id>http://fr000g.github.io/project/2021/10/01/hello-world/</id>
-    <published>2021-10-01T13:01:53.960Z</published>
-    <updated>2021-10-01T13:01:53.960Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="关于PNG文件的学习"><a href="#关于PNG文件的学习" class="headerlink" title="关于PNG文件的学习"></a>关于PNG文件的学习</h1><h2 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h2><p>文件头 <code>89 50 4E 47 0D 0A 1A 0A</code> + 数据块 + 数据块 + 数据块</p><h2 id="数据块chunk"><a href="#数据块chunk" class="headerlink" title="数据块chunk"></a>数据块chunk</h2><p>PNG又两种数据块，关键数据块（critical chunk）与辅助数据块（ancillary chunks）。关键数据块定义4各标准数据块，每个PNG文件都不可缺少</p><p>标准数据块为：IHDR(文件头数据块)、IDAT(图象数据块)、EIND(图象结束数据)</p><p>每个数据块由4部分组成</p><table><thead><tr><th align="center">名称</th><th align="center">字节数</th><th>说明</th></tr></thead><tbody><tr><td align="center">length</td><td align="center">4</td><td>指定数据长度</td></tr><tr><td align="center">chunk type code</td><td align="center">4</td><td>指定数据类型</td></tr><tr><td align="center">chunk data</td><td align="center">可变</td><td>数据</td></tr><tr><td align="center">CRC</td><td align="center">4</td><td>校验数据</td></tr></tbody></table><h2 id="IHDR"><a href="#IHDR" class="headerlink" title="IHDR"></a>IHDR</h2><p>在PNG数据流中唯一，内容共13字节。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Width:              4 bytes</span><br><span class="line">Height:             4 bytes</span><br><span class="line">Bit depth:          1 byte</span><br><span class="line">Color type:         1 byte</span><br><span class="line">Compression method: 1 byte</span><br><span class="line">Filter method:      1 byte</span><br><span class="line">Interlace method:   1 byte</span><br></pre></td></tr></table></figure><p>后面跟4位CRC，CRC由12-29位数据计算得出</p><h2 id="CRC"><a href="#CRC" class="headerlink" title="CRC"></a>CRC</h2><blockquote><p>循环冗余校验（Cyclic Redundancy Check， CRC）是一种根据网络数据包或计算机文件等数据产生简短固定位数校验码的一种信道编码技术，主要用来检测或校验数据传输或者保存后可能出现的错误。它是利用除法及余数的原理来作错误侦测的。</p></blockquote><h2 id="常见题目"><a href="#常见题目" class="headerlink" title="常见题目"></a>常见题目</h2><p>通过修改图片的高度隐写，可通过CRC校验，还原图片</p><p>EXP:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"></span><br><span class="line">misc = <span class="built_in">open</span>(<span class="string">&quot;img.png&quot;</span>, <span class="string">&quot;rb&quot;</span>).read()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1920</span>):</span><br><span class="line">    data = misc[<span class="number">12</span>:<span class="number">16</span>] + struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>, i) + misc[<span class="number">20</span>:<span class="number">29</span>]<span class="comment">#验证宽度</span></span><br><span class="line">    crc32 = binascii.crc32(data) &amp; <span class="number">0xffffffff</span></span><br><span class="line">    <span class="keyword">if</span> crc32 == <span class="number">0x37EC2D65</span>:<span class="comment">#此处为CRC</span></span><br><span class="line">        <span class="built_in">print</span>(i)</span><br></pre></td></tr></table></figure><p>上文中，若验证图片高度，则代码为</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = misc[<span class="number">16</span>:<span class="number">20</span>] + struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>, i) + misc[<span class="number">24</span>:<span class="number">29</span>]</span><br></pre></td></tr></table></figure><p><strong>未完待续</strong></p>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
+    <summary type="html">&lt;h1 id=&quot;关于PNG文件的学习&quot;&gt;&lt;a href=&quot;#关于PNG文件的学习&quot; class=&quot;headerlink&quot; title=&quot;关于PNG文件的学习&quot;&gt;&lt;/a&gt;关于PNG文件的学习&lt;/h1&gt;&lt;h2 id=&quot;文件格式&quot;&gt;&lt;a href=&quot;#文件格式&quot; class=&quot;head</summary>
       
     
     
