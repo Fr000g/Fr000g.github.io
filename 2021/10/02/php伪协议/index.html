@@ -17,18 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>my first blog | Hexo</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="my first blog">
-<meta property="og:url" content="http://fr000g.github.io/my-first-blog/index.html">
+  <title>php伪协议 | Hexo</title>
+  <meta name="description" content="CTF中的php伪协议伪协议相关知识点php伪协议本质上是PHP支持的协议和封装协议 官方文档的描述:PHP 带有很多内置 URL 风格的封装协议，可用于类似 fopen()、 copy()、 file_exists() 和 filesize() 的文件系统函数。 除了这些封装协议，还能通过 stream_wrapper_register() 来注册自定义的封装协议。 file:&#x2F;&#x2F; 作用 访问本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php伪协议">
+<meta property="og:url" content="http://fr000g.github.io/2021/10/02/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/index.html">
 <meta property="og:site_name" content="Fr000g&#39;s bolg">
+<meta property="og:description" content="CTF中的php伪协议伪协议相关知识点php伪协议本质上是PHP支持的协议和封装协议 官方文档的描述:PHP 带有很多内置 URL 风格的封装协议，可用于类似 fopen()、 copy()、 file_exists() 和 filesize() 的文件系统函数。 除了这些封装协议，还能通过 stream_wrapper_register() 来注册自定义的封装协议。 file:&#x2F;&#x2F; 作用 访问本">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-10-01T15:02:12.000Z">
-<meta property="article:modified_time" content="2021-10-01T15:02:12.348Z">
+<meta property="article:published_time" content="2021-10-01T16:43:17.000Z">
+<meta property="article:modified_time" content="2021-10-01T16:44:10.171Z">
 <meta property="article:author" content="frooog">
+<meta property="article:tag" content="知识点">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://fr000g.github.io/my-first-blog/index.html">
+  <link rel="canonical" href="http://fr000g.github.io/2021/10/02/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Fr000g&#39;s bolg" type="application/atom+xml">
   
@@ -310,14 +313,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="page-" class="article article-type-page" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-php伪协议" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      my first blog
+      php伪协议
     </h1>
   
 
@@ -325,22 +328,58 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/my-first-blog/index.html" class="article-date">
-	  <time datetime="2021-10-01T15:02:12.000Z" itemprop="datePublished">2021-10-01</time>
+	<a href="/2021/10/02/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/" class="article-date">
+	  <time datetime="2021-10-01T16:43:17.000Z" itemprop="datePublished">2021-10-02</time>
 	</a>
 </span>
         
         
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a>
+  </span>
+
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/my-first-blog/index.html#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/10/02/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        
+        <h1 id="CTF中的php伪协议"><a href="#CTF中的php伪协议" class="headerlink" title="CTF中的php伪协议"></a>CTF中的php伪协议</h1><h2 id="伪协议相关知识点"><a href="#伪协议相关知识点" class="headerlink" title="伪协议相关知识点"></a>伪协议相关知识点</h2><p>php伪协议本质上是PHP支持的协议和封装协议</p>
+<p>官方文档的描述:PHP 带有很多内置 URL 风格的封装协议，可用于类似 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.fopen.php">fopen()</a>、 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.copy.php">copy()</a>、 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.file-exists.php">file_exists()</a> 和 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.filesize.php">filesize()</a> 的文件系统函数。 除了这些封装协议，还能通过 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.stream-wrapper-register.php">stream_wrapper_register()</a> 来注册自定义的封装协议。</p>
+<h2 id="file"><a href="#file" class="headerlink" title="file://"></a>file://</h2><ul>
+<li><p><strong>作用</strong></p>
+<p>访问本地文件，常用于读取文件</p>
+</li>
+<li><p><strong>用途</strong></p>
+<p>相对路径和绝对路径(也可使用网络路径)</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/index.php?file=./phpinfo.txt</span><br><span class="line">http://localhost/index.php?file=/var/www/html/phpinfo.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="php-重点"><a href="#php-重点" class="headerlink" title="php://    (重点)"></a>php://    (重点)</h2><ul>
+<li><p><strong>作用</strong></p>
+<p>访问输入输出流</p>
+</li>
+</ul>
+<ol>
+<li><p><strong>php://filter</strong></p>
+<p>读取源代码(常用base64编码)</p>
+<p><strong>实例</strong></p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/index.php?php://filter/read=convert.base64-encode/resource=flag.php</span><br></pre></td></tr></table></figure>
+
+<p>​    可选参数</p>
+<p><strong>未完待续</strong></p>
+<hr>
+<p>参考文章:</p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000018991087">PHP伪协议总结</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wjrblogs/p/12285202.html">CTF中常用的php伪协议利用</a></p>
+
       
     </div>
     <div class="article-footer">
@@ -349,7 +388,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://fr000g.github.io/my-first-blog/index.html" title="my first blog" target="_blank" rel="external">http://fr000g.github.io/my-first-blog/index.html</a>
+      <a href="http://fr000g.github.io/2021/10/02/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/" title="php伪协议" target="_blank" rel="external">http://fr000g.github.io/2021/10/02/php伪协议/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -392,6 +431,20 @@
 
   <nav class="bar bar-footer clearfix" data-stick-bottom>
   <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/10/02/MTCTF2021-EZcms-writeup/" title="MTCTF2021_EZcms_writeup"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/10/02/%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/" title="任意文件读取漏洞"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
   
   
   
@@ -453,6 +506,10 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 })(jQuery);
 </script>
 
+
+
+
+   
 
 
 
