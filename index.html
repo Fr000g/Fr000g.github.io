@@ -201,15 +201,29 @@
 
     
       
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="./tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
 
     
       
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="./tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" style="font-size: 13px;">知识点</a>
+    </div>
+  </div>
+
     
       
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="./archives/2021/10/">十月 2021</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="./archives/2021/10/">十月 2021</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -228,10 +242,25 @@
                 
               </p>
               <p class="item-title">
-                <a href="./2021/10/01/%E5%9B%BE%E7%89%87%E5%88%86%E6%9E%90/" class="title">(no title)</a>
+                <a href="./2021/10/01/%E5%9B%BE%E7%89%87%E5%88%86%E6%9E%90/" class="title">关于PNG文件的学习</a>
               </p>
               <p class="item-date">
-                <time datetime="2021-10-01T14:58:19.124Z" itemprop="datePublished">2021-10-01</time>
+                <time datetime="2021-10-01T15:24:29.000Z" itemprop="datePublished">2021-10-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="./2021/10/01/%E6%88%91%E7%9A%84%E6%96%B0%E6%96%87%E7%AB%A0/" class="title">我的新文章</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-10-01T15:24:29.000Z" itemprop="datePublished">2021-10-01</time>
               </p>
             </div>
           </li>
@@ -248,124 +277,68 @@
   
   <main class="main" role="main">
   
-  
-    <div class="content">
-  <article id="post-图片分析" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="content article-list">
     
-    <div class="article-header">
-      
-      <div class="article-meta">
-        <span class="article-date">
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="./2021/10/01/%E5%9B%BE%E7%89%87%E5%88%86%E6%9E%90/">关于PNG文件的学习</a>
+    </h1>
+  
+
+  </div>
+  
+  <p class="article-meta">
+    <span class="article-date">
     <i class="icon icon-calendar-check"></i>
 	<a href="./2021/10/01/%E5%9B%BE%E7%89%87%E5%88%86%E6%9E%90/" class="article-date">
-	  <time datetime="2021-10-01T14:58:19.124Z" itemprop="datePublished">2021-10-01</time>
+	  <time datetime="2021-10-01T15:24:29.000Z" itemprop="datePublished">10月 1</time>
 	</a>
 </span>
-        
-        
-
-        
-
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="./2021/10/01/%E5%9B%BE%E7%89%87%E5%88%86%E6%9E%90/#comments" class="article-comment-link">评论</a></span>
-        
-      </div>
-    </div>
-    <div class="article-entry marked-body" itemprop="articleBody">
-      
-        <h1 id="关于PNG文件的学习"><a href="#关于PNG文件的学习" class="headerlink" title="关于PNG文件的学习"></a>关于PNG文件的学习</h1><h2 id="文件格式"><a href="#文件格式" class="headerlink" title="文件格式"></a>文件格式</h2><p>文件头 <code>89 50 4E 47 0D 0A 1A 0A</code> + 数据块 + 数据块 + 数据块</p>
-<h2 id="数据块chunk"><a href="#数据块chunk" class="headerlink" title="数据块chunk"></a>数据块chunk</h2><p>PNG又两种数据块，关键数据块（critical chunk）与辅助数据块（ancillary chunks）。关键数据块定义4各标准数据块，每个PNG文件都不可缺少</p>
-<p>标准数据块为：IHDR(文件头数据块)、IDAT(图象数据块)、EIND(图象结束数据)</p>
-<p>每个数据块由4部分组成</p>
-<table>
-<thead>
-<tr>
-<th align="center">名称</th>
-<th align="center">字节数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">length</td>
-<td align="center">4</td>
-<td>指定数据长度</td>
-</tr>
-<tr>
-<td align="center">chunk type code</td>
-<td align="center">4</td>
-<td>指定数据类型</td>
-</tr>
-<tr>
-<td align="center">chunk data</td>
-<td align="center">可变</td>
-<td>数据</td>
-</tr>
-<tr>
-<td align="center">CRC</td>
-<td align="center">4</td>
-<td>校验数据</td>
-</tr>
-</tbody></table>
-<h2 id="IHDR"><a href="#IHDR" class="headerlink" title="IHDR"></a>IHDR</h2><p>在PNG数据流中唯一，内容共13字节。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Width:              4 bytes</span><br><span class="line">Height:             4 bytes</span><br><span class="line">Bit depth:          1 byte</span><br><span class="line">Color type:         1 byte</span><br><span class="line">Compression method: 1 byte</span><br><span class="line">Filter method:      1 byte</span><br><span class="line">Interlace method:   1 byte</span><br></pre></td></tr></table></figure>
-
-<p>后面跟4位CRC，CRC由12-29位数据计算得出</p>
-<h2 id="CRC"><a href="#CRC" class="headerlink" title="CRC"></a>CRC</h2><blockquote>
-<p>循环冗余校验（Cyclic Redundancy Check， CRC）是一种根据网络数据包或计算机文件等数据产生简短固定位数校验码的一种信道编码技术，主要用来检测或校验数据传输或者保存后可能出现的错误。它是利用除法及余数的原理来作错误侦测的。</p>
-</blockquote>
-<h2 id="常见题目"><a href="#常见题目" class="headerlink" title="常见题目"></a>常见题目</h2><p>通过修改图片的高度隐写，可通过CRC校验，还原图片</p>
-<p>EXP:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"></span><br><span class="line">misc = <span class="built_in">open</span>(<span class="string">&quot;img.png&quot;</span>, <span class="string">&quot;rb&quot;</span>).read()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1920</span>):</span><br><span class="line">    data = misc[<span class="number">12</span>:<span class="number">16</span>] + struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>, i) + misc[<span class="number">20</span>:<span class="number">29</span>]<span class="comment">#验证宽度</span></span><br><span class="line">    crc32 = binascii.crc32(data) &amp; <span class="number">0xffffffff</span></span><br><span class="line">    <span class="keyword">if</span> crc32 == <span class="number">0x37EC2D65</span>:<span class="comment">#此处为CRC</span></span><br><span class="line">        <span class="built_in">print</span>(i)</span><br></pre></td></tr></table></figure>
-
-
-
-<p>上文中，若验证图片高度，则代码为</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = misc[<span class="number">16</span>:<span class="number">20</span>] + struct.pack(<span class="string">&#x27;&gt;i&#x27;</span>, i) + misc[<span class="number">24</span>:<span class="number">29</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>未完待续</strong></p>
-
-      
-    </div>
-    <div class="article-footer">
-      <blockquote class="mt-2x">
-  <ul class="post-copyright list-unstyled">
     
-    <li class="post-copyright-link hidden-xs">
-      <strong>本文链接：</strong>
-      <a href="http://fr000g.github.io/2021/10/01/%E5%9B%BE%E7%89%87%E5%88%86%E6%9E%90/" title="" target="_blank" rel="external">http://fr000g.github.io/2021/10/01/图片分析/</a>
-    </li>
     
-    <li class="post-copyright-license">
-      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
-    </li>
-  </ul>
-</blockquote>
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="./tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a>
+  </span>
 
 
-<div class="panel panel-default panel-badger">
-  <div class="panel-body">
-    <figure class="media">
-      <div class="media-left">
-        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
-          <img src="./images/avatar.png" class="img-rounded w-full" alt="">
-        </a>
-      </div>
-      <div class="media-body">
-        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">Fr000g</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
-        <div>这个人很懒，什么都没有写</div>
-      </div>
-    </figure>
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="./2021/10/01/%E5%9B%BE%E7%89%87%E5%88%86%E6%9E%90/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+      <article class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="./2021/10/01/%E6%88%91%E7%9A%84%E6%96%B0%E6%96%87%E7%AB%A0/">我的新文章</a>
+    </h1>
+  
+
   </div>
-</div>
-
-
-    </div>
-  </article>
   
-</div>
+  <p class="article-meta">
+    <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="./2021/10/01/%E6%88%91%E7%9A%84%E6%96%B0%E6%96%87%E7%AB%A0/" class="article-date">
+	  <time datetime="2021-10-01T15:24:29.000Z" itemprop="datePublished">10月 1</time>
+	</a>
+</span>
+    
+    
 
-  
+    <span class="post-comment"><i class="icon icon-comment"></i> <a href="./2021/10/01/%E6%88%91%E7%9A%84%E6%96%B0%E6%96%87%E7%AB%A0/#comments" class="article-comment-link">评论</a></span>
+    
+  </p>
+</article>
+
+    
+  </div>
 
    
 </main>
