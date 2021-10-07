@@ -25,14 +25,14 @@
 <meta property="og:site_name" content="Fr000g&#39;s bolg">
 <meta property="og:description" content="php第五关-Writeup前言这道题改编自[BJDCTF2020]EzPHP 原题目中包含create_function()代码注入，绕过绕过 QUERY_STRING 的正则匹配，绕过正则匹配，绕过文件内容读取比较，绕过sha1比较多个知识点，有很大的学习价值，官方WP:2020BJDCTF “EzPHP” +Y1ngCTF “Y1ng’s Baby Code” 官方writeup – 颖奇L">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="c:/Users/Zeyua/AppData/Roaming/Typora/typora-user-images/image-20210928131356843.png">
-<meta property="og:image" content="c:/Users/Zeyua/AppData/Roaming/Typora/typora-user-images/image-20210928153345759.png">
+<meta property="og:image" content="http://fr000g.github.io/images/image-20210928131356843.png">
+<meta property="og:image" content="http://fr000g.github.io/images/image-20210928153345759.png">
 <meta property="article:published_time" content="2021-10-07T08:26:53.000Z">
-<meta property="article:modified_time" content="2021-10-07T08:36:16.073Z">
+<meta property="article:modified_time" content="2021-10-07T08:45:42.880Z">
 <meta property="article:author" content="frooog">
 <meta property="article:tag" content="SSS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:/Users/Zeyua/AppData/Roaming/Typora/typora-user-images/image-20210928131356843.png">
+<meta name="twitter:image" content="http://fr000g.github.io/images/image-20210928131356843.png">
   <!-- Canonical links -->
   <link rel="canonical" href="http://fr000g.github.io/2021/10/07/%E6%8B%9B%E6%96%B0-php%E7%AC%AC%E4%BA%94%E5%85%B3wp/index.html">
   
@@ -374,7 +374,7 @@
 <li><code>system</code>：执行系统指令并输出</li>
 </ul>
 <h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>根据页面内提示，打开网站下的<code>h1Int.txt</code>文件</p>
-<p><img src="C:\Users\Zeyua\AppData\Roaming\Typora\typora-user-images\image-20210928131356843.png" alt="image-20210928131356843"></p>
+<p><img src="/images/image-20210928131356843.png" alt="image-20210928131356843"></p>
 <p>里面的内容是网页的php源码</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="variable">$neko</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    error_reporting(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">echo</span> (<span class="string">&quot;宸у厠鍔�:鐪熺殑浼氭湁h1Int.txt杩欑涓滆タ瀛樺湪鍚�?&lt;br&gt;&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$_SERVER</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (</span><br><span class="line">            preg_match(<span class="string">&#x27;/Chocola|cute|arg|code|flag|system|exec|passwd|ass|eval|sort|shell|ob|start|mail|\$|sou|show|cont|high|reverse|flip|rand|scan|chr|local|sess|id|source|arra|head|light|read|inc|info|bin|hex|oct|echo|print|pi|\.|\&quot;|\&#x27;|log/i&#x27;</span>, <span class="variable">$_SERVER</span>[<span class="string">&#x27;QUERY_STRING&#x27;</span>])</span><br><span class="line">        )</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">&#x27;璇蜂笉瑕佸共鍧忎簨,鍠�&lt;br&gt;&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (preg_match(<span class="string">&#x27;/^Chocola_is_cute$/&#x27;</span>, <span class="variable">$_GET</span>[<span class="string">&#x27;neko&#x27;</span>]) &amp;&amp; <span class="variable">$_GET</span>[<span class="string">&#x27;neko&#x27;</span>] !== <span class="string">&#x27;Chocola_is_cute&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Good Job!&lt;br&gt;&quot;</span>;</span><br><span class="line">        system(<span class="string">&#x27;cat xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#x27;</span>);<span class="comment">//涓嶈璇曞浘鍘荤寽flag鐨勬枃浠跺悕</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">echo</span> <span class="string">&quot;鎮ㄥ繀椤昏澶告垜鍙埍,涓嶇劧涓嶇粰浣爁lag&lt;br&gt;&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -388,7 +388,7 @@
 <p>于是payload为</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="comment">//210.30.97.133:8080/7127564cddd7837b10e72828d407789c.php?%6e%65%6b%6f=%43%68%6f%63%6f%6c%61%5f%69%73%5f%63%75%74%65%0a</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\Zeyua\AppData\Roaming\Typora\typora-user-images\image-20210928153345759.png" alt="image-20210928153345759"></p>
+<p><img src="/images/image-20210928153345759.png" alt="image-20210928153345759"></p>
 <p>最后感谢@forimoc的前端美化</p>
 
       
