@@ -26,7 +26,7 @@
 <meta property="og:description" content="CTF中的php伪协议伪协议相关知识点php伪协议本质上是PHP支持的协议和封装协议 官方文档的描述:PHP 带有很多内置 URL 风格的封装协议，可用于类似 fopen()、 copy()、 file_exists() 和 filesize() 的文件系统函数。 除了这些封装协议，还能通过 stream_wrapper_register() 来注册自定义的封装协议。 file:&#x2F;&#x2F; 作用 访问本">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-01T16:43:17.000Z">
-<meta property="article:modified_time" content="2021-10-01T16:44:10.171Z">
+<meta property="article:modified_time" content="2021-10-07T09:21:21.159Z">
 <meta property="article:author" content="frooog">
 <meta property="article:tag" content="知识点">
 <meta name="twitter:card" content="summary">
@@ -354,13 +354,11 @@
 <li><p><strong>作用</strong></p>
 <p>访问本地文件，常用于读取文件</p>
 </li>
-<li><p><strong>用途</strong></p>
+<li><p><strong>用法</strong></p>
 <p>相对路径和绝对路径(也可使用网络路径)</p>
-</li>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/index.php?file=./phpinfo.txt</span><br><span class="line">http://localhost/index.php?file=/var/www/html/phpinfo.txt</span><br></pre></td></tr></table></figure></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/index.php?file=./phpinfo.txt</span><br><span class="line">http://localhost/index.php?file=/var/www/html/phpinfo.txt</span><br></pre></td></tr></table></figure>
-
-<h2 id="php-重点"><a href="#php-重点" class="headerlink" title="php://    (重点)"></a>php://    (重点)</h2><ul>
+<h2 id="php"><a href="#php" class="headerlink" title="php://"></a>php://</h2><ul>
 <li><p><strong>作用</strong></p>
 <p>访问输入输出流</p>
 </li>
@@ -368,12 +366,28 @@
 <ol>
 <li><p><strong>php://filter</strong></p>
 <p>读取源代码(常用base64编码)</p>
-<p><strong>实例</strong></p>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/index.php?php://filter/read=convert.base64-encode/resource=flag.php</span><br></pre></td></tr></table></figure>
+<p><strong>示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/index.php?file=php://filter/read=convert.base64-encode/resource=flag.php</span><br></pre></td></tr></table></figure>
 
 <p>​    可选参数</p>
+</li>
+</ol>
+<blockquote>
+<p>resource=&lt;要过滤的数据流&gt; 这个参数是必须的。它指定了你要筛选过滤的数据流<br>read=&lt;读链的筛选列表&gt; 该参数可选。可以设定一个或多个过滤器名称，以管道符（|）分隔。<br>write=&lt;写链的筛选列表&gt; 该参数可选。可以设定一个或多个过滤器名称，以管道符（|）分隔。<br>&lt;；两个链的筛选列表&gt; 任何没有以 read= 或 write= 作前缀 的筛选器列表会视情况应用于读或写链。</p>
+</blockquote>
+<ol start="2">
+<li><p><strong>php://input</strong></p>
+<p>执行POST的php代码</p>
+<p>示例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/index.php?file=php://input</span><br><span class="line">//同时传参POST &lt;?php phpinfo()?&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="data"><a href="#data" class="headerlink" title="data://"></a>data://</h2><ul>
+<li><p><strong>作用</strong></p>
+<p>数据流封装，传递相应格式数据。可用来执行php代码（base64编码）</p>
+</li>
+<li><p>示例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/index.php?file=data://text/plain;base64,[编码内容]</span><br></pre></td></tr></table></figure></li>
+</ul>
 <p><strong>未完待续</strong></p>
 <hr>
 <p>参考文章:</p>
