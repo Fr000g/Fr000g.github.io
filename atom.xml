@@ -6,7 +6,7 @@
   <link href="http://fr000g.github.io/atom.xml" rel="self"/>
   
   <link href="http://fr000g.github.io/"/>
-  <updated>2021-10-01T16:45:40.212Z</updated>
+  <updated>2021-10-09T03:49:30.989Z</updated>
   <id>http://fr000g.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>cache-主存映射</title>
+    <link href="http://fr000g.github.io/2021/10/09/cache-%E4%B8%BB%E5%AD%98%E6%98%A0%E5%B0%84/"/>
+    <id>http://fr000g.github.io/2021/10/09/cache-%E4%B8%BB%E5%AD%98%E6%98%A0%E5%B0%84/</id>
+    <published>2021-10-09T01:59:01.000Z</published>
+    <updated>2021-10-09T03:49:30.989Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Cache-主存映射"><a href="#Cache-主存映射" class="headerlink" title="Cache-主存映射"></a>Cache-主存映射</h1><h2 id="cache的定义"><a href="#cache的定义" class="headerlink" title="cache的定义"></a>cache的定义</h2><blockquote><p><strong>高速缓存</strong>（英语：<strong>cache</strong>）简称<strong>缓存</strong>，原始意义是指访问速度比一般<a href="https://zh.wikipedia.org/wiki/%E9%9A%A8%E6%A9%9F%E5%AD%98%E5%8F%96%E8%A8%98%E6%86%B6%E9%AB%94">随机存取存储器</a>（RAM）快的一种RAM，通常它不像系统主存那样使用<a href="https://zh.wikipedia.org/wiki/DRAM">DRAM</a>技术，而使用昂贵但较快速的<a href="https://zh.wikipedia.org/wiki/%E9%9D%99%E6%80%81%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8">SRAM</a>技术。</p></blockquote><p><img src="https://raw.githubusercontent.com/Fr000g/imaes/main/PNG%E5%9B%BE%E5%83%8F.png"></p><h2 id="原理及功能"><a href="#原理及功能" class="headerlink" title="原理及功能"></a>原理及功能</h2><p>利用局部有效性原理，cache拷贝内存中相同数据块，减少CPU直接访问主存的时间损耗</p><h2 id="命中率"><a href="#命中率" class="headerlink" title="命中率"></a>命中率</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hit ratio = hit / (hit + miss) =  no. of hits/total accesses</span><br></pre></td></tr></table></figure><h2 id="映射方式"><a href="#映射方式" class="headerlink" title="映射方式"></a>映射方式</h2><ul><li><p>直接映射</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">i = j modulo m</span><br><span class="line">where</span><br><span class="line">i=cache line number</span><br><span class="line">j= main memory block number</span><br><span class="line">m=number of lines in the cache</span><br></pre></td></tr></table></figure><p>主存中的块只可能被映射到cache中的一个位置上。如果新块需要加载时，cache中的位置被老块占用，则老块被丢弃，因此空间利用率较低</p><p>每个主存地址可被看作3个部分</p><p><img src="https://raw.githubusercontent.com/Fr000g/imaes/main/%E7%9B%B4%E6%8E%A5%E6%98%A0%E5%B0%84.png"></p><p>主存的地址高位被分为两部分，主存字块标记和cache字块地址。CPU送来主存地址后，根据中间字段找到cache字块，再用该字块与高位判断是否有效</p><p>（直接映射其实是组相联映射的一种特例，即单路组相联）</p></li><li><p>全相联映射</p><p>允许主存中的每一个字块映射到cache中的任何位置</p></li><li><p>组相联映射</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">m = v * k</span><br><span class="line">i= j mod v</span><br><span class="line"></span><br><span class="line">where</span><br><span class="line">i=cache set number</span><br><span class="line">j=main memory block number</span><br><span class="line">v=number of sets</span><br><span class="line">m=number of lines in the cache number of sets </span><br><span class="line">k=number of lines in each set </span><br></pre></td></tr></table></figure><p>直接映射的增强，主存在cache中的对应位置可在一组中的任意位置</p></li></ul><hr><p>参考文章:</p><p>[Cache Memory in Computer Organization](<a href="https://www.geeksforgeeks.org/cache-memory-in-computer-organization/">Cache Memory in Computer Organization - GeeksforGeeks</a>)</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Cache-主存映射&quot;&gt;&lt;a href=&quot;#Cache-主存映射&quot; class=&quot;headerlink&quot; title=&quot;Cache-主存映射&quot;&gt;&lt;/a&gt;Cache-主存映射&lt;/h1&gt;&lt;h2 id=&quot;cache的定义&quot;&gt;&lt;a href=&quot;#cache的定义&quot; cla</summary>
+      
+    
+    
+    
+    
+    <category term="机组" scheme="http://fr000g.github.io/tags/%E6%9C%BA%E7%BB%84/"/>
+    
+  </entry>
   
   <entry>
     <title>MTCTF2021_EZcms_writeup</title>
