@@ -6,7 +6,7 @@
   <link href="http://fr000g.github.io/atom.xml" rel="self"/>
   
   <link href="http://fr000g.github.io/"/>
-  <updated>2021-10-10T06:19:29.939Z</updated>
+  <updated>2021-10-19T03:59:36.035Z</updated>
   <id>http://fr000g.github.io/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>海明码</title>
+    <link href="http://fr000g.github.io/2021/10/19/%E6%B5%B7%E6%98%8E%E7%A0%81/"/>
+    <id>http://fr000g.github.io/2021/10/19/%E6%B5%B7%E6%98%8E%E7%A0%81/</id>
+    <published>2021-10-19T01:51:20.000Z</published>
+    <updated>2021-10-19T03:59:36.035Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="关于海明码编码方式的学习"><a href="#关于海明码编码方式的学习" class="headerlink" title="关于海明码编码方式的学习"></a>关于海明码编码方式的学习</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>机组课的海明（汉明）码学的不太行，课本直接不提，老师课件内容和维基百科和各种博客都有些出入，高位低位换来换去的，有些迷糊，重新学习一下（本片以《计算机组成原理》唐朔飞版为主）</p><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote><p>在<a href="https://zh.wikipedia.org/wiki/%E9%9B%BB%E4%BF%A1">电信</a>领域中，<strong>汉明码</strong>（英语：<strong>hamming code</strong>），也称为<strong>海明码</strong>，是<a href="https://zh.wikipedia.org/w/index.php?title=(7,4)%E6%B1%89%E6%98%8E%E7%A0%81&action=edit&redlink=1">(7,4)汉明码</a>推广得到的一种线性纠错码，由<a href="https://zh.wikipedia.org/wiki/%E7%90%86%E6%9F%A5%E5%BE%B7%C2%B7%E8%A1%9B%E6%96%AF%E9%87%8C%C2%B7%E6%BC%A2%E6%98%8E">理查德·卫斯里·汉明</a>于1950年发明。</p></blockquote><blockquote><p>用数学术语来说，汉明码是一种二元线性码。对于所有整数 <em>r</em> ≥ 2，存在一个分组长度 <em>n</em> = 2<em>r</em> − 1、<em>k</em> = 2<em>r</em> − <em>r</em> − 1 编码。因此汉明码的码率为 <em>R</em> = <em>k</em> / <em>n</em> = 1 − <em>r</em> / (2<em>r</em> − 1)，对于最小距离为3、分组长度为 2<em>r</em> − 1 的码来说是最高的。汉明码的<a href="https://zh.wikipedia.org/wiki/%E5%A5%87%E5%81%B6%E6%AA%A2%E9%A9%97%E7%9F%A9%E9%99%A3">奇偶检验矩阵</a>的是通过列出所有长度为 <em>r</em> 的非零列向量构成的。</p></blockquote><p>海明码本质是一种多重奇偶校验码，可检测以为错误</p><h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><ol><li><p>确定校验位的个数</p><p>==2^k^ &gt;= k+n+1==</p><p>其中，k为校验位的个数；n为原数据位个数</p></li><li><p>确定校验位置：2的幂次数（1，2，4，8……）</p></li><li><p>计算校验位</p><p>P1=D3$\bigoplus$ D5$\bigoplus$ D7</p><p>P2=D3$\bigoplus$ D6$\bigoplus$ D7</p><p>P4=D5$\bigoplus$ D6$\bigoplus$ D7</p><p>（直接计1的个数，1的个数为奇数则为1，个数为偶数则为0）</p><blockquote><p>确定各个校验位的检测位数：</p><p>P1可理解为倒数第一位是1的二进制数，如11<del>2</del>(3),101<del>2</del>(5),111<del>2</del>(7)</p><p>P2为倒数第二位是1的二进制数，如11<del>2</del>(3),110<del>2</del>(6),111<del>2</del>(7)</p><p>P4位倒数第三位是1的二进制数，如101<del>2</del>(5),110<del>2</del>(6),111<del>2</del>(7) </p></blockquote></li></ol><h3 id="通用方法"><a href="#通用方法" class="headerlink" title="通用方法"></a>通用方法</h3><p>​    参见<a href="https://zh.wikipedia.org/wiki/%E6%B1%89%E6%98%8E%E7%A0%81">汉明码 - 维基百科，自由的百科全书 (wikipedia.org)</a></p><h3 id="例"><a href="#例" class="headerlink" title="例"></a>例</h3><p>写出1100的海明码</p><ol><li><p>确定k的位数。n=4，则k=3</p><p>（为了应试，直接记原码与校验码位数关系1-&gt;2；2~4-&gt;3；5~11-&gt;4）</p></li><li><p>确定校验码位置，即1，2，4</p></li><li><p>计算</p><p>P1=1$\bigoplus$1$\bigoplus$0（3，5，7）</p><p>P2=1$\bigoplus$0$\bigoplus$0（3，6，7）</p><p>P3=1$\bigoplus$0$\bigoplus$0（5，6，7）</p><p>得P1=0    P2=1    P3=1</p><p>则D4=0    D2=1    D1=1</p></li><li><p>补全</p><table><thead><tr><th align="center">位置</th><th align="center">D1</th><th align="center">D2</th><th align="center">D3</th><th align="center">D4</th><th align="center">D5</th><th align="center">D6</th><th align="center">D7</th></tr></thead><tbody><tr><td align="center">值</td><td align="center">==1==</td><td align="center">==1==</td><td align="center">1</td><td align="center">==0==</td><td align="center">1</td><td align="center">0</td><td align="center">0</td></tr></tbody></table><h2 id="纠错"><a href="#纠错" class="headerlink" title="纠错"></a>纠错</h2></li></ol><p>定义校验位S<del>i</del></p><p>S1=D1$\bigoplus$D3$\bigoplus$ D5$\bigoplus$ D7</p><p>S2=D2$\bigoplus$D3$\bigoplus$ D6$\bigoplus$ D7</p><p>S3=D4$\bigoplus$D5$\bigoplus$ D6$\bigoplus$ D7</p><p>若S<del>3</del>S<del>2</del>S<del>1</del>为000，则无错误；若S<del>3</del>S<del>2</del>S<del>1</del>为001，则第一位错误，同理如下</p><table><thead><tr><th>S<del>3</del>S<del>2</del>S<del>1</del></th><th align="center">000</th><th align="center">001</th><th align="center">010</th><th align="center">011</th><th align="center">100</th><th align="center">101</th><th align="center">110</th><th align="center">111</th></tr></thead><tbody><tr><td>错误位置</td><td align="center">无</td><td align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td align="center">6</td><td align="center">7</td></tr></tbody></table><p>检测出错误位翻转即可</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;关于海明码编码方式的学习&quot;&gt;&lt;a href=&quot;#关于海明码编码方式的学习&quot; class=&quot;headerlink&quot; title=&quot;关于海明码编码方式的学习&quot;&gt;&lt;/a&gt;关于海明码编码方式的学习&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;</summary>
+      
+    
+    
+    
+    
+    <category term="机组" scheme="http://fr000g.github.io/tags/%E6%9C%BA%E7%BB%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于正则表达的学习</title>
+    <link href="http://fr000g.github.io/2021/10/11/%E5%85%B3%E4%BA%8E%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E7%9A%84%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://fr000g.github.io/2021/10/11/%E5%85%B3%E4%BA%8E%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E7%9A%84%E5%AD%A6%E4%B9%A0/</id>
+    <published>2021-10-11T00:40:49.000Z</published>
+    <updated>2021-10-11T06:05:54.634Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="正则表达"><a href="#正则表达" class="headerlink" title="正则表达"></a>正则表达</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前异常零零碎碎学习了一些正则表达的知识点，很多时候是题目考察才会去查询，自己要用的时候发现知识根本不成体系，完全用不了，现在重新学习一下正则表达</p><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote><p>正则表达式(Regular Expression)是一种文本模式，包括普通字符（例如，a 到 z 之间的字母）和特殊字符（称为”元字符”）。</p><p>正则表达式使用==单个字符串==来描述、匹配一系列匹配某个句法规则的字符串。</p></blockquote><h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">^[0-9]+abc$</span><br></pre></td></tr></table></figure><ul><li><code>^</code>匹配字符串开始的位置</li><li><code>[0-9]</code>匹配单个数字，<code>+</code>匹配多个数字</li><li><code>abc$</code>匹配abc（<code>$</code>表示以abc结尾）</li></ul><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>例：</p><ul><li><code>Fr000+g</code>，可以匹配Fr000g、Fr000000g等，+表示之前的字符至少出现一次</li><li><code>Fr000*g</code>，可以匹配Fr00g、Fr000g等，*表示之前的字符至少出现0次</li><li><code>fla?g</code>，可以匹配flag或flaag，？表示前面的字符最多出现一次</li></ul><h2 id="部分语法"><a href="#部分语法" class="headerlink" title="部分语法"></a>部分语法</h2><ol><li><p><code>[ABC]</code>：匹配<code>[]</code>中所有字符</p></li><li><p><code>^[ABC]</code> ：匹配除了<code>[]</code>中所有字符</p></li><li><p><code>[A-Z]</code>：匹配一个区间</p></li><li><p><code>[.]</code>：匹配换行符外的任何字符</p></li><li><p><code>[\s]</code> ：匹配空格符</p><p><code>[\S]</code>：匹配非空格符</p><p><code>[\w]</code>：匹配字母、数字、下划线</p></li></ol><p>匹配某些特殊符号，如<code>^</code>，<code>[</code>时，需要用<code>\</code>转义</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;正则表达&quot;&gt;&lt;a href=&quot;#正则表达&quot; class=&quot;headerlink&quot; title=&quot;正则表达&quot;&gt;&lt;/a&gt;正则表达&lt;/h1&gt;&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h</summary>
+      
+    
+    
+    
+    
+    <category term="知识点" scheme="http://fr000g.github.io/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
+    
+  </entry>
   
   <entry>
     <title>MTCTF2021_EZcms_writeup</title>
