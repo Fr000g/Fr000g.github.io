@@ -6,7 +6,7 @@
   <link href="http://fr000g.github.io/atom.xml" rel="self"/>
   
   <link href="http://fr000g.github.io/"/>
-  <updated>2021-10-19T03:59:36.035Z</updated>
+  <updated>2021-10-26T01:54:14.894Z</updated>
   <id>http://fr000g.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>iptables相关问题</title>
+    <link href="http://fr000g.github.io/2021/10/23/iptables%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/"/>
+    <id>http://fr000g.github.io/2021/10/23/iptables%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</id>
+    <published>2021-10-23T01:53:12.000Z</published>
+    <updated>2021-10-26T01:54:14.894Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>给一台centos7.6的服务器的6379端口用iptables做了访问限制，执行操作</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p tcp --dport 6379 -j DROP</span><br><span class="line">iptables -I INPUT -s 127.0.0.1 -ptcp --dport 6379 -j ACCEPT</span><br><span class="line">service iptables save</span><br><span class="line">service iptables restart</span><br></pre></td></tr></table></figure><p>执行到service iptables save的时候出错，且nmap无法扫到服务器，调查原因。</p><h2 id="指令解析"><a href="#指令解析" class="headerlink" title="指令解析"></a>指令解析</h2><p>​    （未指定表时，默认更改<strong>filter</strong>表的内容）</p><ol><li><p><code>iptables -I INPUT -p tcp --dport 6379 -j DROP</code></p><p>在INPUT链的头部插入规则：6379端口将会丢弃使用tcp协议的报文</p></li><li><p><code>iptables -I INPUT -s 127.0.0.1 -p tcp --dport 6379 -j ACCEPT</code></p><p>再在INPUT链的头部插入规则：6379接受所有来自本机的使用tcp协议的报文</p></li><li><p><code>service iptables save</code>保存更改</p></li><li><p><code>service iptables restart</code>重启服务</p><p>此时，iptables的filter表的INPUT链中规则如下，只允许本地的连接</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Chain INPUT (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line">ACCEPT     tcp  --  localhost            anywhere             tcp dpt:6379</span><br><span class="line">DROP       tcp  --  anywhere             anywhere             tcp dpt:6379 </span><br></pre></td></tr></table></figure></li></ol><h2 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h2><p>在centOS 7中，使用firewalld替代了iptables，使用iptables之前需要关闭firewalld，然后安装iptalbes-service包</p><p>完成安装，执行完上述命令后，使用<code>service iptables save</code>保存更改，之后重启，并未遇到报错</p><p><img src="https://raw.githubusercontent.com/Fr000g/imaes/main/20211020104714.png"></p><p>此时，centOS7的IP为192.168.127.128</p><p><img src="https://raw.githubusercontent.com/Fr000g/imaes/main/20211020104849.png"></p><p>再同网段下使用nmap进行扫描</p><p><img src="https://raw.githubusercontent.com/Fr000g/imaes/main/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-10-20%20105243.png"></p><p>发现可以扫描到centOS服务器</p><p>在centOS 7主机上的6379端口此时处于未被占用情况，6379端口常被用于部署redis服务，于是尝试在部署redis后检测是否有异常</p><img src="https://raw.githubusercontent.com/Fr000g/imaes/main/20211020125613.png" style="zoom:150%;" /><center>本机可访问</center><img src="https://raw.githubusercontent.com/Fr000g/imaes/main/20211020125842.png" style="zoom:150%;" /><center>远程被过滤</center><p>在centOS 7主机上部署redis后，分别尝试在本地连接和远程连接，防火墙配置规则均可以被匹配过滤，无异常</p><p><img src="https://raw.githubusercontent.com/Fr000g/imaes/main/20211020130054.png"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;p&gt;给一台centos7.6的服务器的6379端口用iptables做了访问限制，执行操作&lt;/p&gt;
+&lt;figure class=&quot;highlig</summary>
+      
+    
+    
+    
+    
+    <category term="知识点" scheme="http://fr000g.github.io/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/"/>
+    
+  </entry>
   
   <entry>
     <title>海明码</title>
