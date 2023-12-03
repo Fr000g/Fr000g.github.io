@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>fr000g&#39;s blog</title>
+    <link>https://fr000g.github.io/</link>
+    <description>Recent content on fr000g&#39;s blog</description>
+    <image>
+      <title>fr000g&#39;s blog</title>
+      <url>https://fr000g.github.io/cover.png</url>
+      <link>https://fr000g.github.io/cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 03 Dec 2023 03:53:39 +0000</lastBuildDate><atom:link href="https://fr000g.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Test</title>
+      <link>https://fr000g.github.io/post/test/</link>
+      <pubDate>Sun, 03 Dec 2023 03:53:39 +0000</pubDate>
+      
+      <guid>https://fr000g.github.io/post/test/</guid>
+      <description>Test if markdown is rendered successfully</description>
+    </item>
+    
+    
+    
+  </channel>
+</rss>

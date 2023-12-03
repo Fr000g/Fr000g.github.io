@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://fr000g.github.io/sitemap.xml
