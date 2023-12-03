@@ -104,8 +104,8 @@
   "keywords": [
     "dev"
   ],
-  "articleBody": "Go项目布局 官方项目组织推荐 官方项目地址\n在官方文档中，没有明确指出什么类型的组件应该被放置什么位置，只是做了一些比较基本的推荐\nBasic package 对于简单的包，使用单个文件封装即可\n1 2 3 4 project-root-directory/ ├── go.mod ├── modname.go └── modname_test.go Basic command 对于简单的可执行程序，如果程序不太复杂，也可以用单个的go文件来组织\n1 2 3 4 5 6 project-root-directory/ ├── go.mod ├── auth.go ├── auth_test.go ├── client.go └── main.go Package or command with supporting packages 稍微复杂一些的包或可执行程序，可以根据功能拆封成不同目录中。而且官方也推荐创建一个internal目录，防止一些开发者不希望暴露的内部方法暴露。\n1 2 3 4 5 6 7 8 9 10 11 project-root-directory/ ├── internal/ │ ├── auth/ │ │ ├── auth.go │ │ └── auth_test.go │ └── hash/ │ ├── hash.go │ └── hash_test.go ├── go.mod ├── modname.go └── modname_test.go Multiple packages 如果一个模块由多个可导入的包组成，则每个包有自己的目录\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 project-root-directory/ ├── go.mod ├── modname.go ├── modname_test.go ├── auth/ │ ├── auth.go │ ├── auth_test.go │ └── token/ │ ├── token.go │ └── token_test.go ├── hash/ │ └── hash.go └── internal/ └── trace/ └── trace.go 有一个例子，就是net这个包的组织方式，所以导入的时候，可以使用如下方式导入\n1 2 3 4 import ( \"net/http\" \"net/rpc\" ) 类似的，官方还提到了Multiple commands Packages and commands in the same repository Server project等多种布局，推荐阅读查看。\n知名非官方项目规范 最近也看到了一个非官方的项目布局的golang-standards/project-layout的repo，用于大型的复杂项目的文件组织和布局，这里面详细说明了各种组件应该用什么样的方式去组织。\n这些建议，如果按照功能分类，可以按照一下来分：\n应用程序目录 /cmd: 包含项目的主要应用程序。 /internal: 包含私有应用程序和库代码，不希望外部导入。 /pkg: 包含对外公开的库代码。 服务应用程序目录 /api: 包含 OpenAPI/Swagger 规范、JSON 模式文件等。 Web 应用程序目录 /web: 包含 Web 应用程序特定组件，如静态 Web 资产、服务器端模板和单页应用程序。 公共应用程序目录 /configs: 配置文件模板或默认配置。 /init: 系统初始化和进程管理器配置。 /scripts: 执行构建、安装、分析等操作的脚本。 /build: 打包和持续集成配置。 /deployments: IaaS、PaaS、系统和容器编排部署配置和模板。 测试目录 /test: 包含额外的外部测试应用程序和测试数据。 其他目录 /docs: 设计和用户文档。 /tools: 项目的支持工具。 /examples: 应用程序和/或公共库的示例。 /third_party: 外部辅助工具、分叉代码和其他第三方实用程序。 /githooks: Git 钩子。 /assets: 与存储库相关的其他资产（图片、标志等）。 /website: 项目网站数据（如果没有使用 GitHub 页面）。 这个repo还着重强调了，千万不要用/src这种类型的目录，这样可能会导致和go本身的src目录混淆。\n存在的问题 但是这个项目被go的官方人员用不太客气的语气锐评了了\nThere are two problems with this GitHub repo:\nit claims to host Go standards and does not, in the sense that these are in no way official standards the project-layout standard it puts forth is far too complex and not a standard Regarding “why not tell us the standard Go project layout and we’ll update the doc?”, that only addresses point 2. If there really were standards, they would be in the main Go project doc tree. The standard for project layout would also be a lot shorter. I appreciate your trying to provide a useful resource, but calling it ‘golang-standards’ is claiming more than it is.\nBut for the record, the minimal standard layout for an importable Go repo is really:\nPut a LICENSE file in your root Put a go.mod file in your root Put Go code in your repo, in the root or organized into a directory tree as you see fit That’s it. That’s the “standard”.\nIn particular:\nIt is not required to put commands in cmd/. It is not required to put packages in pkg/. It is not required to put web stuff in web/. It is not required to put APIs in api/. It is not required to put web stuff in web/. It is not required to put configurations in configs/. It is not required to put systemd scripts in init/. It is not required to put shell scripts in scripts/. It is not required to put Docker files in build/package/. It is not required to put CI configs in build/ci/. It is not required to put deployment configs in deployments/. It is not required to put test support in test/. It is not required to put documentation in docs/. It is not required to put supporting tools in tools/. It is not required to put examples in examples/. It is not required to put third_party code in third_party/. It is not required to put git hooks in githooks/ It is not required to put static assets in assets/. It is not required to put website data in website/.\nThe importable golang.org/x repos break every one of these “rules”.\n这段话由Russ Cox在一个issue中提出，大致说了两个事情\n一个项目只要LICENSE，go.mod，还有go的源码就足够了，可以用目录组织go的源代码 这个repo太鸡儿复杂了，不是官方推荐，也不是什么标准 看来go的开发者不太希望大家受到条条框框的限制，希望开发者们以一种灵活资源的方式去开发。\n",
-  "wordCount" : "1555",
+  "articleBody": "Go项目布局 官方项目组织推荐 官方项目地址\n在官方文档中，没有明确指出什么类型的组件应该被放置什么位置，只是做了一些比较基本的推荐\nBasic package 对于简单的包，使用单个文件封装即可\nproject-root-directory/ ├── go.mod ├── modname.go └── modname_test.go Basic command 对于简单的可执行程序，如果程序不太复杂，也可以用单个的go文件来组织\nproject-root-directory/ ├── go.mod ├── auth.go ├── auth_test.go ├── client.go └── main.go Package or command with supporting packages 稍微复杂一些的包或可执行程序，可以根据功能拆封成不同目录中。而且官方也推荐创建一个internal目录，防止一些开发者不希望暴露的内部方法暴露。\nproject-root-directory/ ├── internal/ │ ├── auth/ │ │ ├── auth.go │ │ └── auth_test.go │ └── hash/ │ ├── hash.go │ └── hash_test.go ├── go.mod ├── modname.go └── modname_test.go Multiple packages 如果一个模块由多个可导入的包组成，则每个包有自己的目录\nproject-root-directory/ ├── go.mod ├── modname.go ├── modname_test.go ├── auth/ │ ├── auth.go │ ├── auth_test.go │ └── token/ │ ├── token.go │ └── token_test.go ├── hash/ │ └── hash.go └── internal/ └── trace/ └── trace.go 有一个例子，就是net这个包的组织方式，所以导入的时候，可以使用如下方式导入\nimport ( \"net/http\" \"net/rpc\" ) 类似的，官方还提到了Multiple commands Packages and commands in the same repository Server project等多种布局，推荐阅读查看。\n知名非官方项目规范 最近也看到了一个非官方的项目布局的golang-standards/project-layout的repo，用于大型的复杂项目的文件组织和布局，这里面详细说明了各种组件应该用什么样的方式去组织。\n这些建议，如果按照功能分类，可以按照一下来分：\n应用程序目录 /cmd: 包含项目的主要应用程序。 /internal: 包含私有应用程序和库代码，不希望外部导入。 /pkg: 包含对外公开的库代码。 服务应用程序目录 /api: 包含 OpenAPI/Swagger 规范、JSON 模式文件等。 Web 应用程序目录 /web: 包含 Web 应用程序特定组件，如静态 Web 资产、服务器端模板和单页应用程序。 公共应用程序目录 /configs: 配置文件模板或默认配置。 /init: 系统初始化和进程管理器配置。 /scripts: 执行构建、安装、分析等操作的脚本。 /build: 打包和持续集成配置。 /deployments: IaaS、PaaS、系统和容器编排部署配置和模板。 测试目录 /test: 包含额外的外部测试应用程序和测试数据。 其他目录 /docs: 设计和用户文档。 /tools: 项目的支持工具。 /examples: 应用程序和/或公共库的示例。 /third_party: 外部辅助工具、分叉代码和其他第三方实用程序。 /githooks: Git 钩子。 /assets: 与存储库相关的其他资产（图片、标志等）。 /website: 项目网站数据（如果没有使用 GitHub 页面）。 这个repo还着重强调了，千万不要用/src这种类型的目录，这样可能会导致和go本身的src目录混淆。\n存在的问题 但是这个项目被go的官方人员用不太客气的语气锐评了了\nThere are two problems with this GitHub repo:\nit claims to host Go standards and does not, in the sense that these are in no way official standards the project-layout standard it puts forth is far too complex and not a standard Regarding “why not tell us the standard Go project layout and we’ll update the doc?”, that only addresses point 2. If there really were standards, they would be in the main Go project doc tree. The standard for project layout would also be a lot shorter. I appreciate your trying to provide a useful resource, but calling it ‘golang-standards’ is claiming more than it is.\nBut for the record, the minimal standard layout for an importable Go repo is really:\nPut a LICENSE file in your root Put a go.mod file in your root Put Go code in your repo, in the root or organized into a directory tree as you see fit That’s it. That’s the “standard”.\nIn particular:\nIt is not required to put commands in cmd/. It is not required to put packages in pkg/. It is not required to put web stuff in web/. It is not required to put APIs in api/. It is not required to put web stuff in web/. It is not required to put configurations in configs/. It is not required to put systemd scripts in init/. It is not required to put shell scripts in scripts/. It is not required to put Docker files in build/package/. It is not required to put CI configs in build/ci/. It is not required to put deployment configs in deployments/. It is not required to put test support in test/. It is not required to put documentation in docs/. It is not required to put supporting tools in tools/. It is not required to put examples in examples/. It is not required to put third_party code in third_party/. It is not required to put git hooks in githooks/ It is not required to put static assets in assets/. It is not required to put website data in website/.\nThe importable golang.org/x repos break every one of these “rules”.\n这段话由Russ Cox在一个issue中提出，大致说了两个事情\n一个项目只要LICENSE，go.mod，还有go的源码就足够了，可以用目录组织go的源代码 这个repo太鸡儿复杂了，不是官方推荐，也不是什么标准 看来go的开发者不太希望大家受到条条框框的限制，希望开发者们以一种灵活资源的方式去开发。\n",
+  "wordCount" : "1515",
   "inLanguage": "en",
   "datePublished": "2023-12-03T17:48:42Z",
   "dateModified": "2023-12-03T17:48:42Z",
@@ -311,58 +311,21 @@ code.has-jax {
 <p>在官方文档中，没有明确指出什么类型的组件应该被放置什么位置，只是做了一些比较基本的推荐</p>
 <h3 id="basic-package">Basic package<a hidden class="anchor" aria-hidden="true" href="#basic-package">#</a></h3>
 <p>对于简单的包，使用单个文件封装即可</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">project-root-directory/
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">project-root-directory/
 </span></span><span class="line"><span class="cl">├── go.mod
 </span></span><span class="line"><span class="cl">├── modname.go
 </span></span><span class="line"><span class="cl">└── modname_test.go
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="basic-command">Basic command<a hidden class="anchor" aria-hidden="true" href="#basic-command">#</a></h3>
+</span></span></code></pre></div><h3 id="basic-command">Basic command<a hidden class="anchor" aria-hidden="true" href="#basic-command">#</a></h3>
 <p>对于简单的可执行程序，如果程序不太复杂，也可以用单个的go文件来组织</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">project-root-directory/
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">project-root-directory/
 </span></span><span class="line"><span class="cl">├── go.mod
 </span></span><span class="line"><span class="cl">├── auth.go
 </span></span><span class="line"><span class="cl">├── auth_test.go
 </span></span><span class="line"><span class="cl">├── client.go
 </span></span><span class="line"><span class="cl">└── main.go
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="package-or-command-with-supporting-packages">Package or command with supporting packages<a hidden class="anchor" aria-hidden="true" href="#package-or-command-with-supporting-packages">#</a></h3>
+</span></span></code></pre></div><h3 id="package-or-command-with-supporting-packages">Package or command with supporting packages<a hidden class="anchor" aria-hidden="true" href="#package-or-command-with-supporting-packages">#</a></h3>
 <p>稍微复杂一些的包或可执行程序，可以根据功能拆封成不同目录中。而且官方也推荐创建一个<code>internal</code>目录，防止一些开发者不希望暴露的内部方法暴露。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">project-root-directory/
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">project-root-directory/
 </span></span><span class="line"><span class="cl">├── internal/
 </span></span><span class="line"><span class="cl">│   ├── auth/
 </span></span><span class="line"><span class="cl">│   │   ├── auth.go
@@ -373,30 +336,9 @@ code.has-jax {
 </span></span><span class="line"><span class="cl">├── go.mod
 </span></span><span class="line"><span class="cl">├── modname.go
 </span></span><span class="line"><span class="cl">└── modname_test.go
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="multiple-packages">Multiple packages<a hidden class="anchor" aria-hidden="true" href="#multiple-packages">#</a></h3>
+</span></span></code></pre></div><h3 id="multiple-packages">Multiple packages<a hidden class="anchor" aria-hidden="true" href="#multiple-packages">#</a></h3>
 <p>如果一个模块由多个可导入的包组成，则每个包有自己的目录</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">project-root-directory/
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">project-root-directory/
 </span></span><span class="line"><span class="cl">├── go.mod
 </span></span><span class="line"><span class="cl">├── modname.go
 </span></span><span class="line"><span class="cl">├── modname_test.go
@@ -411,24 +353,12 @@ code.has-jax {
 </span></span><span class="line"><span class="cl">└── internal/
 </span></span><span class="line"><span class="cl">    └── trace/
 </span></span><span class="line"><span class="cl">        └── trace.go
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>有一个例子，就是net这个包的组织方式，所以导入的时候，可以使用如下方式导入</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span></code></pre></div><p>有一个例子，就是net这个包的组织方式，所以导入的时候，可以使用如下方式导入</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
 </span></span><span class="line"><span class="cl">	<span class="s">&#34;net/http&#34;</span>
 </span></span><span class="line"><span class="cl">	<span class="s">&#34;net/rpc&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>类似的，官方还提到了<code>Multiple commands</code> <code>Packages and commands in the same repository</code> <code>Server project</code>等多种布局，推荐阅读查看。</p>
+</span></span></code></pre></div><p>类似的，官方还提到了<code>Multiple commands</code> <code>Packages and commands in the same repository</code> <code>Server project</code>等多种布局，推荐阅读查看。</p>
 <h2 id="知名非官方项目规范">知名非官方项目规范<a hidden class="anchor" aria-hidden="true" href="#知名非官方项目规范">#</a></h2>
 <p>最近也看到了一个非官方的项目布局的<a href="https://github.com/golang-standards/project-layout">golang-standards/project-layout</a>的repo，用于大型的复杂项目的文件组织和布局，这里面详细说明了各种组件应该用什么样的方式去组织。</p>
 <p>这些建议，如果按照功能分类，可以按照一下来分：</p>
