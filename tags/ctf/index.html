@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Tags | fr000g&#39;s blog</title>
+<title>CTF | fr000g&#39;s blog</title>
 <meta name="keywords" content="">
 <meta name="description" content="个人博客 - https://github.com/adityatelange/hugo-PaperMod">
 <meta name="author" content="fr000g">
-<link rel="canonical" href="https://fr000g.github.io/tags/">
+<link rel="canonical" href="https://fr000g.github.io/tags/ctf/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1b82bbed8b13f853704558d527b681efaea938ce91e6ae8903e8b19e73b1b0f8.css" integrity="sha256-G4K77YsT&#43;FNwRVjVJ7aB766pOM6R5q6JA&#43;ixnnOxsPg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://fr000g.github.io/assets/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://fr000g.github.io/favicon-16x16.png">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://fr000g.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://fr000g.github.io/tags/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://fr000g.github.io/tags/ctf/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -55,15 +55,15 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Tags" />
+</noscript><meta property="og:title" content="CTF" />
 <meta property="og:description" content="个人博客 - https://github.com/adityatelange/hugo-PaperMod" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://fr000g.github.io/tags/" /><meta property="og:image" content="https://fr000g.github.io/cover.png"/>
+<meta property="og:url" content="https://fr000g.github.io/tags/ctf/" /><meta property="og:image" content="https://fr000g.github.io/cover.png"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://fr000g.github.io/cover.png"/>
 
-<meta name="twitter:title" content="Tags"/>
+<meta name="twitter:title" content="CTF"/>
 <meta name="twitter:description" content="个人博客 - https://github.com/adityatelange/hugo-PaperMod"/>
 
 </head>
@@ -130,7 +130,7 @@
             </li>
             <li>
                 <a href="https://fr000g.github.io/tags/" title="Tags">
-                    <span class="active">Tags</span>
+                    <span>Tags</span>
                 </a>
             </li>
             <li>
@@ -182,22 +182,51 @@ code.has-jax {
     border: inherit;
     color: #515151;
 }
-</style><main class="main">
-<header class="page-header">
-    <h1>Tags</h1>
+</style><main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="https://fr000g.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://fr000g.github.io/tags/">Tags</a></div>
+  <h1>
+    CTF
+    <a href="/tags/ctf/index.xml" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+  </h1>
 </header>
 
-<ul class="terms-tags">
-    <li>
-        <a href="https://fr000g.github.io/tags/computer-composition-principles/">Computer composition principles <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="https://fr000g.github.io/tags/ctf/">CTF <sup><strong><sup>2</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="https://fr000g.github.io/tags/png/">PNG <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-</ul>
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>LoveMath Writeup
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>LoveMath-writeup 前置知识 可变函数 PHP 支持可变函数的概念。这意味着如果一个变量名后有圆括号，PHP 将寻找与变量的值同名的函数，并且尝试执行它。可变函数可以用来实现包括回调函数，函数表在内的一些用途。
+可变函数不能用于例如 echo，print，unset()，isset()，empty()，include，require 以及类似的语言结构。需要使用自己的包装函数来将这些结构用作可变函数。
+例子 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 &lt;?php function foo() { echo &#34;In foo()&lt;br /&gt;\n&#34;; } function bar($arg = &#39;&#39;) { echo &#34;In bar(); argument was &#39;$arg&#39;.&lt;br /&gt;\n&#34;; } // 使用 echo 的包装函数 function echoit($string) { echo $string; } $func = &#39;foo&#39;; $func(); // This calls foo() $func = &#39;bar&#39;; $func(&#39;test&#39;); // This calls bar() $func = &#39;echoit&#39;; $func(&#39;test&#39;); // This calls echoit() ?...</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-10-30 15:23:32 +0000 UTC'>October 30, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;fr000g</footer>
+  <a class="entry-link" aria-label="post link to LoveMath Writeup" href="https://fr000g.github.io/post/tech/lovemath-writeup/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>PNG File Format Learning
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>关于PNG文件的学习 文件格式 文件头 89 50 4E 47 0D 0A 1A 0A &#43; 数据块 &#43; 数据块 &#43; 数据块
+数据块chunk PNG又两种数据块，关键数据块（critical chunk）与辅助数据块（ancillary chunks）。关键数据块定义4各标准数据块，每个PNG文件都不可缺少
+标准数据块为：IHDR(文件头数据块)、IDAT(图象数据块)、EIND(图象结束数据)
+每个数据块由4部分组成
+名称	字节数	说明 length	4	指定数据长度 chunk type code	4	指定数据类型 chunk data	可变	数据 CRC	4	校验数据 IHDR 在PNG数据流中唯一，内容共13字节。
+1 2 3 4 5 6 7 8 Width: 4 bytes Height: 4 bytes Bit depth: 1 byte Color type: 1 byte Compression method: 1 byte Filter method: 1 byte Interlace method: 1 byte 后面跟4位CRC，CRC由12-29位数据计算得出 CRC 循环冗余校验（Cyclic Redundancy Check， CRC）是一种根据网络数据包或计算机文件等数据产生简短固定位数校验码的一种信道编码技术，主要用来检测或校验数据传输或者保存后可能出现的错误。它是利用除法及余数的原理来作错误侦测的。...</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-10-10 15:50:11 +0000 UTC'>October 10, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;fr000g</footer>
+  <a class="entry-link" aria-label="post link to PNG File Format Learning" href="https://fr000g.github.io/post/tech/png-file-format-learning/"></a>
+</article>
     </main>
     
 <footer class="footer">

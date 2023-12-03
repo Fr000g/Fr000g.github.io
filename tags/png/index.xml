@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>PNG on fr000g&#39;s blog</title>
+    <link>https://fr000g.github.io/tags/png/</link>
+    <description>Recent content in PNG on fr000g&#39;s blog</description>
+    <image>
+      <title>fr000g&#39;s blog</title>
+      <url>https://fr000g.github.io/cover.png</url>
+      <link>https://fr000g.github.io/cover.png</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 10 Oct 2021 15:50:11 +0000</lastBuildDate><atom:link href="https://fr000g.github.io/tags/png/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PNG File Format Learning</title>
+      <link>https://fr000g.github.io/post/tech/png-file-format-learning/</link>
+      <pubDate>Sun, 10 Oct 2021 15:50:11 +0000</pubDate>
+      
+      <guid>https://fr000g.github.io/post/tech/png-file-format-learning/</guid>
+      <description>description info here</description>
+    </item>
+    
+  </channel>
+</rss>

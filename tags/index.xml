@@ -11,13 +11,31 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 03 Dec 2023 03:53:39 +0000</lastBuildDate><atom:link href="https://fr000g.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Oct 2021 15:23:32 +0000</lastBuildDate><atom:link href="https://fr000g.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>dev</title>
-      <link>https://fr000g.github.io/tags/dev/</link>
-      <pubDate>Sun, 03 Dec 2023 03:53:39 +0000</pubDate>
+      <title>CTF</title>
+      <link>https://fr000g.github.io/tags/ctf/</link>
+      <pubDate>Sat, 30 Oct 2021 15:23:32 +0000</pubDate>
       
-      <guid>https://fr000g.github.io/tags/dev/</guid>
+      <guid>https://fr000g.github.io/tags/ctf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Computer composition principles</title>
+      <link>https://fr000g.github.io/tags/computer-composition-principles/</link>
+      <pubDate>Tue, 19 Oct 2021 16:07:35 +0000</pubDate>
+      
+      <guid>https://fr000g.github.io/tags/computer-composition-principles/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PNG</title>
+      <link>https://fr000g.github.io/tags/png/</link>
+      <pubDate>Sun, 10 Oct 2021 15:50:11 +0000</pubDate>
+      
+      <guid>https://fr000g.github.io/tags/png/</guid>
       <description></description>
     </item>
     

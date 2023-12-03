@@ -11,14 +11,32 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 03 Dec 2023 03:53:39 +0000</lastBuildDate><atom:link href="https://fr000g.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Oct 2021 15:23:32 +0000</lastBuildDate><atom:link href="https://fr000g.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Test</title>
-      <link>https://fr000g.github.io/post/tech/test/</link>
-      <pubDate>Sun, 03 Dec 2023 03:53:39 +0000</pubDate>
+      <title>LoveMath Writeup</title>
+      <link>https://fr000g.github.io/post/tech/lovemath-writeup/</link>
+      <pubDate>Sat, 30 Oct 2021 15:23:32 +0000</pubDate>
       
-      <guid>https://fr000g.github.io/post/tech/test/</guid>
-      <description>Test if markdown is rendered successfully</description>
+      <guid>https://fr000g.github.io/post/tech/lovemath-writeup/</guid>
+      <description>LoveMath</description>
+    </item>
+    
+    <item>
+      <title>Hamming</title>
+      <link>https://fr000g.github.io/post/tech/hamming/</link>
+      <pubDate>Tue, 19 Oct 2021 16:07:35 +0000</pubDate>
+      
+      <guid>https://fr000g.github.io/post/tech/hamming/</guid>
+      <description>description info here</description>
+    </item>
+    
+    <item>
+      <title>PNG File Format Learning</title>
+      <link>https://fr000g.github.io/post/tech/png-file-format-learning/</link>
+      <pubDate>Sun, 10 Oct 2021 15:50:11 +0000</pubDate>
+      
+      <guid>https://fr000g.github.io/post/tech/png-file-format-learning/</guid>
+      <description>description info here</description>
     </item>
     
     

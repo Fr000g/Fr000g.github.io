@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>tech on fr000g&#39;s blog</title>
-    <link>https://fr000g.github.io/post/tech/</link>
-    <description>Recent content in tech on fr000g&#39;s blog</description>
+    <title>CTF on fr000g&#39;s blog</title>
+    <link>https://fr000g.github.io/tags/ctf/</link>
+    <description>Recent content in CTF on fr000g&#39;s blog</description>
     <image>
       <title>fr000g&#39;s blog</title>
       <url>https://fr000g.github.io/cover.png</url>
@@ -11,7 +11,7 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 30 Oct 2021 15:23:32 +0000</lastBuildDate><atom:link href="https://fr000g.github.io/post/tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Oct 2021 15:23:32 +0000</lastBuildDate><atom:link href="https://fr000g.github.io/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>LoveMath Writeup</title>
       <link>https://fr000g.github.io/post/tech/lovemath-writeup/</link>
@@ -19,15 +19,6 @@
       
       <guid>https://fr000g.github.io/post/tech/lovemath-writeup/</guid>
       <description>LoveMath</description>
-    </item>
-    
-    <item>
-      <title>Hamming</title>
-      <link>https://fr000g.github.io/post/tech/hamming/</link>
-      <pubDate>Tue, 19 Oct 2021 16:07:35 +0000</pubDate>
-      
-      <guid>https://fr000g.github.io/post/tech/hamming/</guid>
-      <description>description info here</description>
     </item>
     
     <item>

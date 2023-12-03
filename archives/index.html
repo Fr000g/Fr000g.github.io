@@ -196,7 +196,42 @@
         </ul>
     </nav>
 </header>
-<main class="main">
+
+<script type="text/javascript"
+        async
+        src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style><main class="main">
 
 <header class="page-header">
   <h1>
@@ -212,16 +247,28 @@
   </h1>
 </header>
 <div class="archive-year">
-  <h2 class="archive-year-header">2023<sup class="archive-count">&nbsp;&nbsp;1</sup>
+  <h2 class="archive-year-header">2021<sup class="archive-count">&nbsp;&nbsp;3</sup>
   </h2>
   <div class="archive-month">
-    <h3 class="archive-month-header">December<sup class="archive-count">&nbsp;&nbsp;1</sup></h3>
+    <h3 class="archive-month-header">October<sup class="archive-count">&nbsp;&nbsp;3</sup></h3>
     <div class="archive-posts">
       <div class="archive-entry">
-        <h3 class="archive-entry-title">Test
+        <h3 class="archive-entry-title">LoveMath Writeup
         </h3>
-        <div class="archive-meta"><span title='2023-12-03 03:53:39 +0000 UTC'>December 3, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;fr000g</div>
-        <a class="entry-link" aria-label="post link to Test" href="https://fr000g.github.io/post/tech/test/"></a>
+        <div class="archive-meta"><span title='2021-10-30 15:23:32 +0000 UTC'>October 30, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;fr000g</div>
+        <a class="entry-link" aria-label="post link to LoveMath Writeup" href="https://fr000g.github.io/post/tech/lovemath-writeup/"></a>
+      </div>
+      <div class="archive-entry">
+        <h3 class="archive-entry-title">Hamming
+        </h3>
+        <div class="archive-meta"><span title='2021-10-19 16:07:35 +0000 UTC'>October 19, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;fr000g</div>
+        <a class="entry-link" aria-label="post link to Hamming" href="https://fr000g.github.io/post/tech/hamming/"></a>
+      </div>
+      <div class="archive-entry">
+        <h3 class="archive-entry-title">PNG File Format Learning
+        </h3>
+        <div class="archive-meta"><span title='2021-10-10 15:50:11 +0000 UTC'>October 10, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;fr000g</div>
+        <a class="entry-link" aria-label="post link to PNG File Format Learning" href="https://fr000g.github.io/post/tech/png-file-format-learning/"></a>
       </div>
     </div>
   </div>
