@@ -10,7 +10,7 @@
       <link>https://fr000g.github.io/cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>zh-CN</language>
     <lastBuildDate>Sat, 30 Oct 2021 15:23:32 +0000</lastBuildDate><atom:link href="https://fr000g.github.io/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>LoveMath Writeup</title>
@@ -27,7 +27,7 @@
       <pubDate>Sun, 10 Oct 2021 15:50:11 +0000</pubDate>
       
       <guid>https://fr000g.github.io/post/tech/png-file-format-learning/</guid>
-      <description>description info here</description>
+      <description>对于PNG文件格式的学习</description>
     </item>
     
   </channel>

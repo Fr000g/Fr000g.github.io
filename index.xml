@@ -10,8 +10,17 @@
       <link>https://fr000g.github.io/cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Sat, 30 Oct 2021 15:23:32 +0000</lastBuildDate><atom:link href="https://fr000g.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 03 Dec 2023 17:48:42 +0000</lastBuildDate><atom:link href="https://fr000g.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go项目布局</title>
+      <link>https://fr000g.github.io/post/tech/go%E9%A1%B9%E7%9B%AE%E5%B8%83%E5%B1%80/</link>
+      <pubDate>Sun, 03 Dec 2023 17:48:42 +0000</pubDate>
+      
+      <guid>https://fr000g.github.io/post/tech/go%E9%A1%B9%E7%9B%AE%E5%B8%83%E5%B1%80/</guid>
+      <description>记录一些组织go项目的方法</description>
+    </item>
+    
     <item>
       <title>LoveMath Writeup</title>
       <link>https://fr000g.github.io/post/tech/lovemath-writeup/</link>
@@ -27,7 +36,7 @@
       <pubDate>Tue, 19 Oct 2021 16:07:35 +0000</pubDate>
       
       <guid>https://fr000g.github.io/post/tech/hamming/</guid>
-      <description>description info here</description>
+      <description>关于海明码编码方式的学习 前言 机组课的海明（汉明）码学的不太行，课本直接不提，老师课件内容和维基百科和各种博客都有些出入，高位低位换来换去的，</description>
     </item>
     
     <item>
@@ -36,7 +45,7 @@
       <pubDate>Sun, 10 Oct 2021 15:50:11 +0000</pubDate>
       
       <guid>https://fr000g.github.io/post/tech/png-file-format-learning/</guid>
-      <description>description info here</description>
+      <description>对于PNG文件格式的学习</description>
     </item>
     
     

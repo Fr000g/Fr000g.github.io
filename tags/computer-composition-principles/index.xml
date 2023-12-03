@@ -10,7 +10,7 @@
       <link>https://fr000g.github.io/cover.png</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>zh-CN</language>
     <lastBuildDate>Tue, 19 Oct 2021 16:07:35 +0000</lastBuildDate><atom:link href="https://fr000g.github.io/tags/computer-composition-principles/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hamming</title>
@@ -18,7 +18,7 @@
       <pubDate>Tue, 19 Oct 2021 16:07:35 +0000</pubDate>
       
       <guid>https://fr000g.github.io/post/tech/hamming/</guid>
-      <description>description info here</description>
+      <description>关于海明码编码方式的学习 前言 机组课的海明（汉明）码学的不太行，课本直接不提，老师课件内容和维基百科和各种博客都有些出入，高位低位换来换去的，</description>
     </item>
     
   </channel>

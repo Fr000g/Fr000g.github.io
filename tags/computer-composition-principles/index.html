@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>Computer composition principles | fr000g&#39;s blog</title>
 <meta name="keywords" content="">
-<meta name="description" content="个人博客 - https://github.com/adityatelange/hugo-PaperMod">
+<meta name="description" content="个人博客 - https://fr000g.github.com">
 <meta name="author" content="fr000g">
 <link rel="canonical" href="https://fr000g.github.io/tags/computer-composition-principles/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.1b82bbed8b13f853704558d527b681efaea938ce91e6ae8903e8b19e73b1b0f8.css" integrity="sha256-G4K77YsT&#43;FNwRVjVJ7aB766pOM6R5q6JA&#43;ixnnOxsPg=" rel="preload stylesheet" as="style">
@@ -56,7 +56,7 @@
 
     </style>
 </noscript><meta property="og:title" content="Computer composition principles" />
-<meta property="og:description" content="个人博客 - https://github.com/adityatelange/hugo-PaperMod" />
+<meta property="og:description" content="个人博客 - https://fr000g.github.com" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://fr000g.github.io/tags/computer-composition-principles/" /><meta property="og:image" content="https://fr000g.github.io/cover.png"/>
 
@@ -64,7 +64,7 @@
 <meta name="twitter:image" content="https://fr000g.github.io/cover.png"/>
 
 <meta name="twitter:title" content="Computer composition principles"/>
-<meta name="twitter:description" content="个人博客 - https://github.com/adityatelange/hugo-PaperMod"/>
+<meta name="twitter:description" content="个人博客 - https://fr000g.github.com"/>
 
 </head>
 
@@ -109,11 +109,6 @@
         </div>
         <ul id="menu">
             <li>
-                <a href="https://fr000g.github.io/archives" title="Archive">
-                    <span>Archive</span>
-                </a>
-            </li>
-            <li>
                 <a href="https://fr000g.github.io/post/tech" title="Tech">
                     <span>Tech</span>
                 </a>
@@ -121,6 +116,11 @@
             <li>
                 <a href="https://fr000g.github.io/post/lifestyle" title="Lifestyle">
                     <span>Lifestyle</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://fr000g.github.io/archives" title="Archive">
+                    <span>Archive</span>
                 </a>
             </li>
             <li>
@@ -147,42 +147,7 @@
         </ul>
     </nav>
 </header>
-
-<script type="text/javascript"
-        async
-        src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[\[','\]\]']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-});
-
-MathJax.Hub.Queue(function() {
-    
-    
-    
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-</script>
-
-<style>
-code.has-jax {
-    font: inherit;
-    font-size: 100%;
-    background: inherit;
-    border: inherit;
-    color: #515151;
-}
-</style><main class="main"> 
+<main class="main"> 
 <header class="page-header"><div class="breadcrumbs"><a href="https://fr000g.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://fr000g.github.io/tags/">Tags</a></div>
   <h1>
     Computer composition principles
@@ -203,27 +168,9 @@ code.has-jax {
     </h2>
   </header>
   <div class="entry-content">
-    <p>关于海明码编码方式的学习 前言 机组课的海明（汉明）码学的不太行，课本直接不提，老师课件内容和维基百科和各种博客都有些出入，高位低位换来换去的，有些迷糊，重新学习一下（本片以《计算机组成原理》唐朔飞版为主）
-简介 在电信领域中，汉明码（英语：hamming code），也称为海明码，是(7,4)汉明码推广得到的一种线性纠错码，由理查德·卫斯里·汉明于1950年发明。
-用数学术语来说，汉明码是一种二元线性码。对于所有整数 r ≥ 2，存在一个分组长度 n = 2r − 1、k = 2r − r − 1 编码。因此汉明码的码率为 R = k / n = 1 − r / (2r − 1)，对于最小距离为3、分组长度为 2r − 1 的码来说是最高的。汉明码的奇偶检验矩阵的是通过列出所有长度为 r 的非零列向量构成的。
-海明码本质是一种多重奇偶校验码，可检测以为错误
-编码 确定校验位的个数
-2^k^ &gt;= k&#43;n&#43;1
-其中，k为校验位的个数；n为原数据位个数
-确定校验位置：2的幂次数（1，2，4，8……）
-计算校验位
-P1=D3$\bigoplus$ D5$\bigoplus$ D7
-P2=D3$\bigoplus$ D6$\bigoplus$ D7
-P4=D5$\bigoplus$ D6$\bigoplus$ D7
-（直接计1的个数，1的个数为奇数则为1，个数为偶数则为0）
-确定各个校验位的检测位数：
-P1可理解为倒数第一位是1的二进制数，如112(3),1012(5),1112(7)
-P2为倒数第二位是1的二进制数，如112(3),1102(6),1112(7)
-P4位倒数第三位是1的二进制数，如1012(5),1102(6),1112(7)
-通用方法 参见汉明码 - 维基百科，自由的百科全书 (wikipedia.org)
-例 写出1100的海明码...</p>
+    <p>关于海明码编码方式的学习 前言 机组课的海明（汉明）码学的不太行，课本直接不提，老师课件内容和维基百科和各种博客都有些出入，高位低位换来换去的，...</p>
   </div>
-  <footer class="entry-footer"><span title='2021-10-19 16:07:35 +0000 UTC'>October 19, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;fr000g</footer>
+  <footer class="entry-footer"><span title='2021-10-19 16:07:35 +0000 UTC'>October 19, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;fr000g</footer>
   <a class="entry-link" aria-label="post link to Hamming" href="https://fr000g.github.io/post/tech/hamming/"></a>
 </article>
     </main>
