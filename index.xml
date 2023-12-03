@@ -14,10 +14,10 @@
     <lastBuildDate>Sun, 03 Dec 2023 03:53:39 +0000</lastBuildDate><atom:link href="https://fr000g.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Test</title>
-      <link>https://fr000g.github.io/post/test/</link>
+      <link>https://fr000g.github.io/post/tech/test/</link>
       <pubDate>Sun, 03 Dec 2023 03:53:39 +0000</pubDate>
       
-      <guid>https://fr000g.github.io/post/test/</guid>
+      <guid>https://fr000g.github.io/post/tech/test/</guid>
       <description>Test if markdown is rendered successfully</description>
     </item>
     
