@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>用BubbleTea写一个漂亮的TUI程序 | fr000g&#39;s blog</title>
+<meta name="keywords" content="dev, TUI">
+<meta name="description" content="简介 The fun, functional and stateful way to build terminal apps. A Go framework based on The Elm Architecture. Bubble Tea is well-suited for simple and complex terminal applications, either inline, full-window, or a mix of both. BubbleTea是一个轻量级的TUI(Terminal User Int">
+<meta name="author" content="fr000g">
+<link rel="canonical" href="https://fr000g.github.io/post/tech/%E7%94%A8bubbletea%E5%86%99%E4%B8%80%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84tui%E7%A8%8B%E5%BA%8F/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.1b82bbed8b13f853704558d527b681efaea938ce91e6ae8903e8b19e73b1b0f8.css" integrity="sha256-G4K77YsT&#43;FNwRVjVJ7aB766pOM6R5q6JA&#43;ixnnOxsPg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://fr000g.github.io/assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://fr000g.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://fr000g.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://fr000g.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://fr000g.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="用BubbleTea写一个漂亮的TUI程序" />
+<meta property="og:description" content="简介 The fun, functional and stateful way to build terminal apps. A Go framework based on The Elm Architecture. Bubble Tea is well-suited for simple and complex terminal applications, either inline, full-window, or a mix of both. BubbleTea是一个轻量级的TUI(Terminal User Int" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fr000g.github.io/post/tech/%E7%94%A8bubbletea%E5%86%99%E4%B8%80%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84tui%E7%A8%8B%E5%BA%8F/" /><meta property="og:image" content="https://fr000g.github.io/cover.png"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-12-10T17:11:57+00:00" />
+<meta property="article:modified_time" content="2023-12-10T17:11:57+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://fr000g.github.io/cover.png"/>
+
+<meta name="twitter:title" content="用BubbleTea写一个漂亮的TUI程序"/>
+<meta name="twitter:description" content="简介 The fun, functional and stateful way to build terminal apps. A Go framework based on The Elm Architecture. Bubble Tea is well-suited for simple and complex terminal applications, either inline, full-window, or a mix of both. BubbleTea是一个轻量级的TUI(Terminal User Int"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://fr000g.github.io/post/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "tech",
+      "item": "https://fr000g.github.io/post/tech/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "用BubbleTea写一个漂亮的TUI程序",
+      "item": "https://fr000g.github.io/post/tech/%E7%94%A8bubbletea%E5%86%99%E4%B8%80%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84tui%E7%A8%8B%E5%BA%8F/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "用BubbleTea写一个漂亮的TUI程序",
+  "name": "用BubbleTea写一个漂亮的TUI程序",
+  "description": "简介 The fun, functional and stateful way to build terminal apps. A Go framework based on The Elm Architecture. Bubble Tea is well-suited for simple and complex terminal applications, either inline, full-window, or a mix of both. BubbleTea是一个轻量级的TUI(Terminal User Int",
+  "keywords": [
+    "dev", "TUI"
+  ],
+  "articleBody": "简介 The fun, functional and stateful way to build terminal apps. A Go framework based on The Elm Architecture. Bubble Tea is well-suited for simple and complex terminal applications, either inline, full-window, or a mix of both.\nBubbleTea是一个轻量级的TUI(Terminal User Interface)框架，在其基础上，可以轻松的开发一些好看的命令行工具。\nBubble符合Elm框架(一种函数式的前端框架)的标准。\n基础 首先熟悉一下官方文档中的例子。我们在这里创建了一个简单的选项表，模拟让用户选择不同食物。\n程序入口 func main() { // 此处的initialModel()返回一个Model model := initialModel() p := tea.NewProgram(initialModel()) if _, err := p.Run(); err != nil { fmt.Printf(\"Alas, there's been an error: %v\", err) os.Exit(1) } } 用tea.NewProgram()创建一个program，然后使用p.Run()来启动程序。tea.NewProgram()的参数通常是Model类型。\nModel Model是一个接口，接口定义如下\n// Model contains the program's state as well as its core functions. type Model interface { Init() Cmd Update(Msg) (Model, Cmd) View() string } 也就是说，只要我们的类型实现了Init(), Update(Msg), View()方法，就可以把其作为Model参数传入tea.NewProgram()中。\n创建一个model结构体，并实现Model接口。\ntype model struct { choices []string cursor int selected map[int]struct{} } // 首先被调用的函数，返回optional // 如果不执行初始命令，则返回 nil。 func (m model) Init() tea.Cmd { return nil } // 收到消息时调用Update()。用它来检查消息 // Update()将更新Model或者执行指令 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) { switch msg := msg.(type) { case tea.KeyMsg: switch msg.String() { case \"ctrl+c\", \"q\": return m, tea.Quit case \"up\", \"k\": if m.cursor \u003e 0 { m.cursor-- } case \"down\", \"j\": if m.cursor \u003c len(m.choices)-1 { m.cursor++ } case \"enter\", \" \": _, ok := m.selected[m.cursor] if ok { delete(m.selected, m.cursor) } else { m.selected[m.cursor] = struct{}{} } } } return m, nil } // View()用来渲染UI，每次调用Update()后都会调用View() func (m model) View() string { s := \"What should we buy at the market?\\n\\n\" for i, choice := range m.choices { cursor := \" \" if m.cursor == i { cursor = \"\u003e\" } checked := \" \" if _, ok := m.selected[i]; ok { checked = \"x\" } s += fmt.Sprintf(\"%s [%s] %s\\n\", cursor, checked, choice) } s += \"\\nPress q to quit.\\n\" return s } Update()接受的msg可以是任何类型的，通常使用断言进行类型判断，从而对不同类型的msg做处理。在例子中，tea.KeyMsg指的是是键盘输入，里面对应不同的类型做了不同逻辑判断。\nView()是渲染UI的函数，这里通过对m。curosr为的值进行判断，从而显示游标\u003e的位置。\nInitialization函数 实例代码中还提供了一个Initialization函数，用来初始化model中的数据，但是这也不是必须的。我们可以通过很多别的方法创建、编辑model中的值\nfunc initialModel() model { return model{ // Our to-do list is a grocery list choices: []string{\"Buy carrots\", \"Buy celery\", \"Buy kohlrabi\"}, // A map which indicates which choices are selected. We're using // the map like a mathematical set. The keys refer to the indexes // of the `choices` slice, above. selected: make(map[int]struct{}), } } 当然，实例中的TUI过于简陋，实际上BubbleTea开发的TUI都很漂亮。BubbleTea的GitHub页面提供了非常多的实例，供开发者学习。\n进度条(官方用例) 一个渐变色的进度条(animated)，动画过渡平滑\n另一种实现方式(静态的)，每次update才渲染一次。\n实现(animated) 全局变量\nconst ( padding = 2 // 填充长度 maxWidth = 80 // 进度条宽度 ) var helpStyle = lipgloss.NewStyle().Foreground(lipgloss.Color(\"#626262\")).Render // 帮助字段样式 type tickMsg time.Time // msg类型 model定义\n// 引入了\"github.com/charmbracelet/bubbles/progress\"中的progress这个model type model struct { progress progress.Model } github.com/charmbracelet/bubbles/ 本身也有不少已经实现的model，比如list, progress, spinner, paginator, spinner, table等，可以快速构建一个TUI应用。\nInit函数实现\nfunc (m model) Init() tea.Cmd { return tickCmd() } 这里返回了tickCmd()函数，这个函数定义如下:\nfunc tickCmd() tea.Cmd { return tea.Tick(time.Second*1, func(t time.Time) tea.Msg { return tickMsg(t) }) } 后面的函数作为参数传入，目的只是返回一个time.time类型，这里我其实不理解为什么开发者会把这个函数设计的这么复杂，在tea.Tick的实现中，有大段的话解释，大致内容如下：\nTick产生的定时器独立于系统时间 Tick函数需要传入一个时间间隔和一个函数作为参数。这个函数会返回一个消息，在这个消息中包含了定时器触发的时间 Tick函数只会发送单个消息，并不会自动按照间隔发送多个消息。为了实现定期触发消息，需要在接收到消息后返回另一个 Tick Cmd。 也就是说，这样的写法可以当成固定的组合用法\ntype TickMsg time.Time func doTick() Cmd { return Tick(time.Second, func(t time.Time) Msg { return TickMsg(t) }) } func (m model) Init() Cmd { // Start ticking. return doTick() } func (m model) Update(msg Msg) (Model, Cmd) { switch msg.(type) { case TickMsg: // Return your Tick command again to loop. return m, doTick() } return m, nil } Update函数\nfunc (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) { switch msg := msg.(type) { case tea.KeyMsg: return m, tea.Quit case tea.WindowSizeMsg: m.progress.Width = msg.Width - padding*2 - 4 if m.progress.Width \u003e maxWidth { m.progress.Width = maxWidth } return m, nil case tickMsg: if m.progress.Percent() == 1.0 { return m, tea.Quit } // Note that you can also use progress.Model.SetPercent to set the // percentage value explicitly, too. cmd := m.progress.IncrPercent(0.25) return m, tea.Batch(tickCmd(), cmd) // FrameMsg is sent when the progress bar wants to animate itself case progress.FrameMsg: progressModel, cmd := m.progress.Update(msg) m.progress = progressModel.(progress.Model) return m, cmd default: return m, nil } } 在Update函数中，分别处理了窗口大小事件，点按键盘事件，时间跳动事件等。\nView方法\nfunc (m model) View() string { pad := strings.Repeat(\" \", padding) return \"\\n\" + pad + m.progress.View() + \"\\n\\n\" + pad + helpStyle(\"Press any key to quit\") } 在process的方法的基础上，添加了占位符，添加了帮助信息。\n命令行迷宫 package tui import ( \"strings\" \"vimMaze/maze\" tea \"github.com/charmbracelet/bubbletea\" \"github.com/charmbracelet/lipgloss\" ) const ( wall = iota path person end key ) // 设置帮助字段样式，砖块样式 var helpStyle = lipgloss.NewStyle().Foreground(lipgloss.Color(\"#626262\")).Render var brickStyle = lipgloss.NewStyle().Foreground(lipgloss.Color(\"#B6482F\")).Render type model struct { Maze maze.Maze } func (m model) Init() tea.Cmd { return nil } func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) { switch msg := msg.(type) { case tea.KeyMsg: switch key := msg.String(); key { case \"ctrl+c\": return m, tea.Quit case \"j\": m.Maze.GoDown() return m, nil case \"k\": m.Maze.GoUp() return m, nil case \"h\": m.Maze.Goleft() return m, nil case \"l\": m.Maze.Goright() return m, nil } case tea.WindowSizeMsg: m.Maze = maze.GenerateMaze(min(msg.Height, msg.Width)) return m, nil } var cmd tea.Cmd return m, cmd } func (m model) View() string { if m.Maze.Win == true { return \"You win!🎉\" + \"\\n\\n \" + helpStyle(\"Press ctrl+c to exit\") } var build strings.Builder for _, valueRow := range m.Maze.Map { for _, valuePoint := range valueRow { if valuePoint == wall { build.WriteString(brickStyle(\"░░\")) } else if valuePoint == path { build.WriteString(\" \") } else if valuePoint == person { build.WriteString(\"🧑\") } else if valuePoint == end { build.WriteString(\"💰\") } } build.WriteString(\"\\n\") } return build.String() } TODO: 为nmap开发一个简单TUI，方便用户定义参数 可能遥遥无期了\n",
+  "wordCount" : "2266",
+  "inLanguage": "en",
+  "datePublished": "2023-12-10T17:11:57Z",
+  "dateModified": "2023-12-10T17:11:57Z",
+  "author":{
+    "@type": "Person",
+    "name": "fr000g"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://fr000g.github.io/post/tech/%E7%94%A8bubbletea%E5%86%99%E4%B8%80%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84tui%E7%A8%8B%E5%BA%8F/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "fr000g's blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://fr000g.github.io/assets/favicon.ico"
+    }
+  }
+}
+</script><script type="text/javascript"
+        async
+        src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://fr000g.github.io/" accesskey="h" title="fr000g&#39;s blog (Alt + H)">fr000g&#39;s blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://fr000g.github.io/post/tech" title="Tech">
+                    <span>Tech</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://fr000g.github.io/post/lifestyle" title="Lifestyle">
+                    <span>Lifestyle</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://fr000g.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://fr000g.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://fr000g.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://space.bilibili.com/12477710" title="Bilibili">
+                    <span>Bilibili</span>&nbsp;
+                    <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12">
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+                        <path d="M15 3h6v6"></path>
+                        <path d="M10 14L21 3"></path>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://fr000g.github.io/">Home</a>&nbsp;»&nbsp;<a href="https://fr000g.github.io/post/">Posts</a>&nbsp;»&nbsp;<a href="https://fr000g.github.io/post/tech/">tech</a></div>
+    <h1 class="post-title">
+      用BubbleTea写一个漂亮的TUI程序
+    </h1>
+    <div class="post-meta"><span title='2023-12-10 17:11:57 +0000 UTC'>December 10, 2023</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;fr000g
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e7%ae%80%e4%bb%8b" aria-label="简介">简介</a></li>
+                <li>
+                    <a href="#%e5%9f%ba%e7%a1%80" aria-label="基础">基础</a><ul>
+                        
+                <li>
+                    <a href="#%e7%a8%8b%e5%ba%8f%e5%85%a5%e5%8f%a3" aria-label="程序入口">程序入口</a></li>
+                <li>
+                    <a href="#model" aria-label="Model">Model</a></li>
+                <li>
+                    <a href="#initialization%e5%87%bd%e6%95%b0" aria-label="Initialization函数">Initialization函数</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e8%bf%9b%e5%ba%a6%e6%9d%a1%e5%ae%98%e6%96%b9%e7%94%a8%e4%be%8b" aria-label="进度条(官方用例)">进度条(官方用例)</a><ul>
+                        
+                <li>
+                    <a href="#%e5%ae%9e%e7%8e%b0animated" aria-label="实现(animated)">实现(animated)</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%91%bd%e4%bb%a4%e8%a1%8c%e8%bf%b7%e5%ae%ab" aria-label="命令行迷宫">命令行迷宫</a></li>
+                <li>
+                    <a href="#todo-%e4%b8%banmap%e5%bc%80%e5%8f%91%e4%b8%80%e4%b8%aa%e7%ae%80%e5%8d%95tui%e6%96%b9%e4%be%bf%e7%94%a8%e6%88%b7%e5%ae%9a%e4%b9%89%e5%8f%82%e6%95%b0" aria-label="TODO: 为nmap开发一个简单TUI，方便用户定义参数">TODO: 为nmap开发一个简单TUI，方便用户定义参数</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="简介">简介<a hidden class="anchor" aria-hidden="true" href="#简介">#</a></h2>
+<p><img loading="lazy" src="https://camo.githubusercontent.com/43927db9533c5fde08c71679f256f0d37bc6bb4e1f2d13aa11ad9fe8203d602b/68747470733a2f2f73747566662e636861726d2e73682f627562626c657465612f627562626c657465612d6769746875622d6865616465722d73696d706c652e706e67" alt=""  />
+</p>
+<blockquote>
+<p>The fun, functional and stateful way to build terminal apps. A Go framework based on The Elm Architecture. Bubble Tea is well-suited for simple and complex terminal applications, either inline, full-window, or a mix of both.</p>
+</blockquote>
+<p>BubbleTea是一个轻量级的TUI(Terminal User Interface)框架，在其基础上，可以轻松的开发一些好看的命令行工具。</p>
+<p>Bubble符合Elm框架(一种函数式的前端框架)的标准。</p>
+<h2 id="基础">基础<a hidden class="anchor" aria-hidden="true" href="#基础">#</a></h2>
+<p>首先熟悉一下官方文档中的例子。我们在这里创建了一个简单的选项表，模拟让用户选择不同食物。</p>
+<p><img loading="lazy" src="/images/aa6a21b9d8cc314a344593a2d826d905.png" alt="简单的list实例"  />
+</p>
+<h3 id="程序入口">程序入口<a hidden class="anchor" aria-hidden="true" href="#程序入口">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 此处的initialModel()返回一个Model
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">model</span> <span class="o">:=</span> <span class="nf">initialModel</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">p</span> <span class="o">:=</span> <span class="nx">tea</span><span class="p">.</span><span class="nf">NewProgram</span><span class="p">(</span><span class="nf">initialModel</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">p</span><span class="p">.</span><span class="nf">Run</span><span class="p">();</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;Alas, there&#39;s been an error: %v&#34;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">os</span><span class="p">.</span><span class="nf">Exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>用<code>tea.NewProgram()</code>创建一个program，然后使用<code>p.Run()</code>来启动程序。<code>tea.NewProgram()</code>的参数通常是<code>Model</code>类型。</p>
+<h3 id="model">Model<a hidden class="anchor" aria-hidden="true" href="#model">#</a></h3>
+<p>Model是一个接口，接口定义如下</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// Model contains the program&#39;s state as well as its core functions.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">Model</span> <span class="kd">interface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">Init</span><span class="p">()</span> <span class="nx">Cmd</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">Update</span><span class="p">(</span><span class="nx">Msg</span><span class="p">)</span> <span class="p">(</span><span class="nx">Model</span><span class="p">,</span> <span class="nx">Cmd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">View</span><span class="p">()</span> <span class="kt">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>也就是说，只要我们的类型实现了<code>Init()</code>, <code>Update(Msg)</code>, <code>View()</code>方法，就可以把其作为Model参数传入<code>tea.NewProgram()</code>中。</p>
+<p>创建一个model结构体，并实现Model接口。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">model</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">choices</span>  <span class="p">[]</span><span class="kt">string</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">cursor</span>   <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">selected</span> <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kd">struct</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 首先被调用的函数，返回optional
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 如果不执行初始命令，则返回 nil。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="nx">model</span><span class="p">)</span> <span class="nf">Init</span><span class="p">()</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">Cmd</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 收到消息时调用Update()。用它来检查消息
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Update()将更新Model或者执行指令
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="nx">model</span><span class="p">)</span> <span class="nf">Update</span><span class="p">(</span><span class="nx">msg</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">Msg</span><span class="p">)</span> <span class="p">(</span><span class="nx">tea</span><span class="p">.</span><span class="nx">Model</span><span class="p">,</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">Cmd</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">switch</span> <span class="nx">msg</span> <span class="o">:=</span> <span class="nx">msg</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">KeyMsg</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="k">switch</span> <span class="nx">msg</span><span class="p">.</span><span class="nf">String</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="s">&#34;ctrl+c&#34;</span><span class="p">,</span> <span class="s">&#34;q&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">m</span><span class="p">,</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">Quit</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="s">&#34;up&#34;</span><span class="p">,</span> <span class="s">&#34;k&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">m</span><span class="p">.</span><span class="nx">cursor</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">m</span><span class="p">.</span><span class="nx">cursor</span><span class="o">--</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="s">&#34;down&#34;</span><span class="p">,</span> <span class="s">&#34;j&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">m</span><span class="p">.</span><span class="nx">cursor</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">choices</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">m</span><span class="p">.</span><span class="nx">cursor</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="s">&#34;enter&#34;</span><span class="p">,</span> <span class="s">&#34; &#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">_</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">m</span><span class="p">.</span><span class="nx">selected</span><span class="p">[</span><span class="nx">m</span><span class="p">.</span><span class="nx">cursor</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nb">delete</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">selected</span><span class="p">,</span> <span class="nx">m</span><span class="p">.</span><span class="nx">cursor</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">m</span><span class="p">.</span><span class="nx">selected</span><span class="p">[</span><span class="nx">m</span><span class="p">.</span><span class="nx">cursor</span><span class="p">]</span> <span class="p">=</span> <span class="kd">struct</span><span class="p">{}{}</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">m</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// View()用来渲染UI，每次调用Update()后都会调用View()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="nx">model</span><span class="p">)</span> <span class="nf">View</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">s</span> <span class="o">:=</span> <span class="s">&#34;What should we buy at the market?\n\n&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">choice</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">m</span><span class="p">.</span><span class="nx">choices</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">cursor</span> <span class="o">:=</span> <span class="s">&#34; &#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">m</span><span class="p">.</span><span class="nx">cursor</span> <span class="o">==</span> <span class="nx">i</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">cursor</span> <span class="p">=</span> <span class="s">&#34;&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">checked</span> <span class="o">:=</span> <span class="s">&#34; &#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">m</span><span class="p">.</span><span class="nx">selected</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">checked</span> <span class="p">=</span> <span class="s">&#34;x&#34;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">s</span> <span class="o">+=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s [%s] %s\n&#34;</span><span class="p">,</span> <span class="nx">cursor</span><span class="p">,</span> <span class="nx">checked</span><span class="p">,</span> <span class="nx">choice</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">s</span> <span class="o">+=</span> <span class="s">&#34;\nPress q to quit.\n&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">s</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><code>Update()</code>接受的msg可以是任何类型的，通常使用断言进行类型判断，从而对不同类型的msg做处理。在例子中，<code>tea.KeyMsg</code>指的是是键盘输入，里面对应不同的类型做了不同逻辑判断。</p>
+<p><code>View()</code>是渲染UI的函数，这里通过对m。curosr为的值进行判断，从而显示游标<code>&gt;</code>的位置。</p>
+<h3 id="initialization函数">Initialization函数<a hidden class="anchor" aria-hidden="true" href="#initialization函数">#</a></h3>
+<p>实例代码中还提供了一个Initialization函数，用来初始化model中的数据，但是这也不是必须的。我们可以通过很多别的方法创建、编辑model中的值</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">initialModel</span><span class="p">()</span> <span class="nx">model</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">model</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// Our to-do list is a grocery list
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">choices</span><span class="p">:</span>  <span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&#34;Buy carrots&#34;</span><span class="p">,</span> <span class="s">&#34;Buy celery&#34;</span><span class="p">,</span> <span class="s">&#34;Buy kohlrabi&#34;</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// A map which indicates which choices are selected. We&#39;re using
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="c1">// the  map like a mathematical set. The keys refer to the indexes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="c1">// of the `choices` slice, above.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">selected</span><span class="p">:</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kd">struct</span><span class="p">{}),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>当然，实例中的TUI过于简陋，实际上BubbleTea开发的TUI都很漂亮。BubbleTea的GitHub页面提供了非常多的实例，供开发者学习。</p>
+<h2 id="进度条官方用例">进度条(官方用例)<a hidden class="anchor" aria-hidden="true" href="#进度条官方用例">#</a></h2>
+<p>一个渐变色的进度条(animated)，动画过渡平滑</p>
+<p><img loading="lazy" src="/images/7642bbf8d480d8b18deea36d4be50402.png" alt="简单的list实例"  />
+</p>
+<p>另一种实现方式(静态的)，每次update才渲染一次。</p>
+<p><img loading="lazy" src="/images/00819308005eb904862ef48af3062c8f.png" alt="静态进度条"  />
+</p>
+<h3 id="实现animated">实现(animated)<a hidden class="anchor" aria-hidden="true" href="#实现animated">#</a></h3>
+<p><strong>全局变量</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">const</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">padding</span>  <span class="p">=</span> <span class="mi">2</span> <span class="c1">// 填充长度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">maxWidth</span> <span class="p">=</span> <span class="mi">80</span> <span class="c1">// 进度条宽度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">helpStyle</span> <span class="p">=</span> <span class="nx">lipgloss</span><span class="p">.</span><span class="nf">NewStyle</span><span class="p">().</span><span class="nf">Foreground</span><span class="p">(</span><span class="nx">lipgloss</span><span class="p">.</span><span class="nf">Color</span><span class="p">(</span><span class="s">&#34;#626262&#34;</span><span class="p">)).</span><span class="nx">Render</span> <span class="c1">// 帮助字段样式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">tickMsg</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span> <span class="c1">// msg类型
+</span></span></span></code></pre></div><p><strong>model定义</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 引入了&#34;github.com/charmbracelet/bubbles/progress&#34;中的progress这个model
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">model</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">progress</span> <span class="nx">progress</span><span class="p">.</span><span class="nx">Model</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>github.com/charmbracelet/bubbles/ 本身也有不少已经实现的model，比如list, progress, spinner, paginator, spinner, table等，可以快速构建一个TUI应用。</p>
+<p><strong>Init函数实现</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="nx">model</span><span class="p">)</span> <span class="nf">Init</span><span class="p">()</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">Cmd</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nf">tickCmd</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>这里返回了<code>tickCmd()</code>函数，这个函数定义如下:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">tickCmd</span><span class="p">()</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">Cmd</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">tea</span><span class="p">.</span><span class="nf">Tick</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="o">*</span><span class="mi">1</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">)</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">Msg</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nf">tickMsg</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>后面的函数作为参数传入，目的只是返回一个<code>time.time</code>类型，这里我其实不理解为什么开发者会把这个函数设计的这么复杂，在<code>tea.Tick</code>的实现中，有大段的话解释，大致内容如下：</p>
+<ul>
+<li><code>Tick</code>产生的定时器独立于系统时间</li>
+<li><code>Tick</code>函数需要传入一个时间间隔和一个函数作为参数。这个函数会返回一个消息，在这个消息中包含了定时器触发的时间</li>
+<li><code>Tick</code>函数只会发送单个消息，并不会自动按照间隔发送多个消息。为了实现定期触发消息，需要在接收到消息后返回另一个 Tick Cmd。</li>
+</ul>
+<p>也就是说，这样的写法可以当成固定的组合用法</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">TickMsg</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">doTick</span><span class="p">()</span> <span class="nx">Cmd</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nf">Tick</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">t</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Time</span><span class="p">)</span> <span class="nx">Msg</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nf">TickMsg</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="nx">model</span><span class="p">)</span> <span class="nf">Init</span><span class="p">()</span> <span class="nx">Cmd</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// Start ticking.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="nf">doTick</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="nx">model</span><span class="p">)</span> <span class="nf">Update</span><span class="p">(</span><span class="nx">msg</span> <span class="nx">Msg</span><span class="p">)</span> <span class="p">(</span><span class="nx">Model</span><span class="p">,</span> <span class="nx">Cmd</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">switch</span> <span class="nx">msg</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="nx">TickMsg</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// Return your Tick command again to loop.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">return</span> <span class="nx">m</span><span class="p">,</span> <span class="nf">doTick</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">m</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span></code></pre></div><p><strong>Update函数</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="nx">model</span><span class="p">)</span> <span class="nf">Update</span><span class="p">(</span><span class="nx">msg</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">Msg</span><span class="p">)</span> <span class="p">(</span><span class="nx">tea</span><span class="p">.</span><span class="nx">Model</span><span class="p">,</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">Cmd</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">switch</span> <span class="nx">msg</span> <span class="o">:=</span> <span class="nx">msg</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">KeyMsg</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">m</span><span class="p">,</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">Quit</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">WindowSizeMsg</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">m</span><span class="p">.</span><span class="nx">progress</span><span class="p">.</span><span class="nx">Width</span> <span class="p">=</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">Width</span> <span class="o">-</span> <span class="nx">padding</span><span class="o">*</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">m</span><span class="p">.</span><span class="nx">progress</span><span class="p">.</span><span class="nx">Width</span> <span class="p">&gt;</span> <span class="nx">maxWidth</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">m</span><span class="p">.</span><span class="nx">progress</span><span class="p">.</span><span class="nx">Width</span> <span class="p">=</span> <span class="nx">maxWidth</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">m</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="nx">tickMsg</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">m</span><span class="p">.</span><span class="nx">progress</span><span class="p">.</span><span class="nf">Percent</span><span class="p">()</span> <span class="o">==</span> <span class="mf">1.0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">m</span><span class="p">,</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">Quit</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="c1">// Note that you can also use progress.Model.SetPercent to set the
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="c1">// percentage value explicitly, too.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">cmd</span> <span class="o">:=</span> <span class="nx">m</span><span class="p">.</span><span class="nx">progress</span><span class="p">.</span><span class="nf">IncrPercent</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">m</span><span class="p">,</span> <span class="nx">tea</span><span class="p">.</span><span class="nf">Batch</span><span class="p">(</span><span class="nf">tickCmd</span><span class="p">(),</span> <span class="nx">cmd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// FrameMsg is sent when the progress bar wants to animate itself
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">case</span> <span class="nx">progress</span><span class="p">.</span><span class="nx">FrameMsg</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">progressModel</span><span class="p">,</span> <span class="nx">cmd</span> <span class="o">:=</span> <span class="nx">m</span><span class="p">.</span><span class="nx">progress</span><span class="p">.</span><span class="nf">Update</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">m</span><span class="p">.</span><span class="nx">progress</span> <span class="p">=</span> <span class="nx">progressModel</span><span class="p">.(</span><span class="nx">progress</span><span class="p">.</span><span class="nx">Model</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">m</span><span class="p">,</span> <span class="nx">cmd</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">default</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">m</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>在Update函数中，分别处理了窗口大小事件，点按键盘事件，时间跳动事件等。</p>
+<p><strong>View方法</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="nx">model</span><span class="p">)</span> <span class="nf">View</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">pad</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Repeat</span><span class="p">(</span><span class="s">&#34; &#34;</span><span class="p">,</span> <span class="nx">padding</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="s">&#34;\n&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">pad</span> <span class="o">+</span> <span class="nx">m</span><span class="p">.</span><span class="nx">progress</span><span class="p">.</span><span class="nf">View</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34;\n\n&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">pad</span> <span class="o">+</span> <span class="nf">helpStyle</span><span class="p">(</span><span class="s">&#34;Press any key to quit&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>在<code>process</code>的方法的基础上，添加了占位符，添加了帮助信息。</p>
+<h2 id="命令行迷宫">命令行迷宫<a hidden class="anchor" aria-hidden="true" href="#命令行迷宫">#</a></h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">tui</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;strings&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;vimMaze/maze&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">tea</span> <span class="s">&#34;github.com/charmbracelet/bubbletea&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/charmbracelet/lipgloss&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">const</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">wall</span> <span class="p">=</span> <span class="kc">iota</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">path</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">person</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">end</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">key</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 设置帮助字段样式，砖块样式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">helpStyle</span> <span class="p">=</span> <span class="nx">lipgloss</span><span class="p">.</span><span class="nf">NewStyle</span><span class="p">().</span><span class="nf">Foreground</span><span class="p">(</span><span class="nx">lipgloss</span><span class="p">.</span><span class="nf">Color</span><span class="p">(</span><span class="s">&#34;#626262&#34;</span><span class="p">)).</span><span class="nx">Render</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">brickStyle</span> <span class="p">=</span> <span class="nx">lipgloss</span><span class="p">.</span><span class="nf">NewStyle</span><span class="p">().</span><span class="nf">Foreground</span><span class="p">(</span><span class="nx">lipgloss</span><span class="p">.</span><span class="nf">Color</span><span class="p">(</span><span class="s">&#34;#B6482F&#34;</span><span class="p">)).</span><span class="nx">Render</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">model</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">Maze</span> <span class="nx">maze</span><span class="p">.</span><span class="nx">Maze</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="nx">model</span><span class="p">)</span> <span class="nf">Init</span><span class="p">()</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">Cmd</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="nx">model</span><span class="p">)</span> <span class="nf">Update</span><span class="p">(</span><span class="nx">msg</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">Msg</span><span class="p">)</span> <span class="p">(</span><span class="nx">tea</span><span class="p">.</span><span class="nx">Model</span><span class="p">,</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">Cmd</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">switch</span> <span class="nx">msg</span> <span class="o">:=</span> <span class="nx">msg</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">KeyMsg</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="k">switch</span> <span class="nx">key</span> <span class="o">:=</span> <span class="nx">msg</span><span class="p">.</span><span class="nf">String</span><span class="p">();</span> <span class="nx">key</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="s">&#34;ctrl+c&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">m</span><span class="p">,</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">Quit</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="s">&#34;j&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">m</span><span class="p">.</span><span class="nx">Maze</span><span class="p">.</span><span class="nf">GoDown</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">m</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="s">&#34;k&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">m</span><span class="p">.</span><span class="nx">Maze</span><span class="p">.</span><span class="nf">GoUp</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">m</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="s">&#34;h&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">m</span><span class="p">.</span><span class="nx">Maze</span><span class="p">.</span><span class="nf">Goleft</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">m</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="s">&#34;l&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">m</span><span class="p">.</span><span class="nx">Maze</span><span class="p">.</span><span class="nf">Goright</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">m</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">case</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">WindowSizeMsg</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">m</span><span class="p">.</span><span class="nx">Maze</span> <span class="p">=</span> <span class="nx">maze</span><span class="p">.</span><span class="nf">GenerateMaze</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="nx">msg</span><span class="p">.</span><span class="nx">Height</span><span class="p">,</span> <span class="nx">msg</span><span class="p">.</span><span class="nx">Width</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">m</span><span class="p">,</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">cmd</span> <span class="nx">tea</span><span class="p">.</span><span class="nx">Cmd</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">m</span><span class="p">,</span> <span class="nx">cmd</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">m</span> <span class="nx">model</span><span class="p">)</span> <span class="nf">View</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">m</span><span class="p">.</span><span class="nx">Maze</span><span class="p">.</span><span class="nx">Win</span> <span class="o">==</span> <span class="kc">true</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="s">&#34;You win!🎉&#34;</span> <span class="o">+</span> <span class="s">&#34;\n\n  &#34;</span> <span class="o">+</span> <span class="nf">helpStyle</span><span class="p">(</span><span class="s">&#34;Press ctrl+c to exit&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">build</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">Builder</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">valueRow</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">m</span><span class="p">.</span><span class="nx">Maze</span><span class="p">.</span><span class="nx">Map</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">valuePoint</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">valueRow</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="nx">valuePoint</span> <span class="o">==</span> <span class="nx">wall</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">build</span><span class="p">.</span><span class="nf">WriteString</span><span class="p">(</span><span class="nf">brickStyle</span><span class="p">(</span><span class="s">&#34;░░&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">valuePoint</span> <span class="o">==</span> <span class="nx">path</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">build</span><span class="p">.</span><span class="nf">WriteString</span><span class="p">(</span><span class="s">&#34;  &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">valuePoint</span> <span class="o">==</span> <span class="nx">person</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">build</span><span class="p">.</span><span class="nf">WriteString</span><span class="p">(</span><span class="s">&#34;🧑&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">valuePoint</span> <span class="o">==</span> <span class="nx">end</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">build</span><span class="p">.</span><span class="nf">WriteString</span><span class="p">(</span><span class="s">&#34;💰&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nx">build</span><span class="p">.</span><span class="nf">WriteString</span><span class="p">(</span><span class="s">&#34;\n&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">build</span><span class="p">.</span><span class="nf">String</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="todo-为nmap开发一个简单tui方便用户定义参数">TODO: 为nmap开发一个简单TUI，方便用户定义参数<a hidden class="anchor" aria-hidden="true" href="#todo-为nmap开发一个简单tui方便用户定义参数">#</a></h2>
+<p><del>可能遥遥无期了</del></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://fr000g.github.io/tags/dev/">dev</a></li>
+      <li><a href="https://fr000g.github.io/tags/tui/">TUI</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://fr000g.github.io/post/tech/go%E9%A1%B9%E7%9B%AE%E5%B8%83%E5%B1%80/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Go项目布局</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://fr000g.github.io/">fr000g&#39;s blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

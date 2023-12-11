@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>dev on fr000g&#39;s blog</title>
-    <link>https://fr000g.github.io/tags/dev/</link>
-    <description>Recent content in dev on fr000g&#39;s blog</description>
+    <title>TUI on fr000g&#39;s blog</title>
+    <link>https://fr000g.github.io/tags/tui/</link>
+    <description>Recent content in TUI on fr000g&#39;s blog</description>
     <image>
       <title>fr000g&#39;s blog</title>
       <url>https://fr000g.github.io/cover.png</url>
@@ -11,7 +11,7 @@
     </image>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 10 Dec 2023 17:11:57 +0000</lastBuildDate><atom:link href="https://fr000g.github.io/tags/dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Dec 2023 17:11:57 +0000</lastBuildDate><atom:link href="https://fr000g.github.io/tags/tui/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>用BubbleTea写一个漂亮的TUI程序</title>
       <link>https://fr000g.github.io/post/tech/%E7%94%A8bubbletea%E5%86%99%E4%B8%80%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84tui%E7%A8%8B%E5%BA%8F/</link>
@@ -19,15 +19,6 @@
       
       <guid>https://fr000g.github.io/post/tech/%E7%94%A8bubbletea%E5%86%99%E4%B8%80%E4%B8%AA%E6%BC%82%E4%BA%AE%E7%9A%84tui%E7%A8%8B%E5%BA%8F/</guid>
       <description>简介 The fun, functional and stateful way to build terminal apps. A Go framework based on The Elm Architecture. Bubble Tea is well-suited for simple and complex terminal applications, either inline, full-window, or a mix of both. BubbleTea是一个轻量级的TUI(Terminal User Int</description>
-    </item>
-    
-    <item>
-      <title>Go项目布局</title>
-      <link>https://fr000g.github.io/post/tech/go%E9%A1%B9%E7%9B%AE%E5%B8%83%E5%B1%80/</link>
-      <pubDate>Sun, 03 Dec 2023 17:48:42 +0000</pubDate>
-      
-      <guid>https://fr000g.github.io/post/tech/go%E9%A1%B9%E7%9B%AE%E5%B8%83%E5%B1%80/</guid>
-      <description>记录一些组织go项目的方法</description>
     </item>
     
   </channel>
